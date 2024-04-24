@@ -1,13 +1,14 @@
-import type { Action, ThunkAction } from "@reduxjs/toolkit"
-import { combineSlices, configureStore } from "@reduxjs/toolkit"
+import { combineSlices, configureStore } from '@reduxjs/toolkit';
 
-const rootReducer = combineSlices()
+import type { Action, ThunkAction } from '@reduxjs/toolkit';
 
-export type RootState = ReturnType<typeof rootReducer>
+const rootReducer = combineSlices();
+
+export type RootState = ReturnType<typeof rootReducer>;
 
 export const store = configureStore({
   reducer: {},
-})
+});
 
 export type AppDispatch = typeof store.dispatch;
 export type AppThunk<ThunkReturnType = void> = ThunkAction<
@@ -15,4 +16,4 @@ export type AppThunk<ThunkReturnType = void> = ThunkAction<
   RootState,
   unknown,
   Action
->
+>;

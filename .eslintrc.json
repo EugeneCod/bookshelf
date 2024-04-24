@@ -11,6 +11,7 @@
   "root": true,
   "ignorePatterns": ["dist"],
   "rules": {
+    "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/consistent-type-imports": [
       2,
       { "fixStyle": "separate-type-imports" }
@@ -26,7 +27,27 @@
           }
         ]
       }
-    ]
+    ],
+    "import/prefer-default-export": "off",
+    "no-unused-expressions": "error",
+    "no-console": "warn",
+    "curly": "error",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
+        ],
+        "newlines-between": "always"
+      }
+    ] 
   },
   "overrides": [
     { "files": ["*.{c,m,}{t,j}s", "*.{t,j}sx"] },
