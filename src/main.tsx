@@ -12,7 +12,7 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
   },
-]);
+], {basename: '/bookshelf'});
 
 const container = document.getElementById('root');
 
