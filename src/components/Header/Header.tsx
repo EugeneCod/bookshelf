@@ -1,18 +1,15 @@
 import { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { AuthBtn, Navigation, Toggle as ThemeToggle } from '../';
 import headerLogo from '../../assets/img/header_logo.svg';
 import { ThemeContext } from '../../app/contexts/ThemeContext';
+import { ROUTES } from '../../utils/constants';
 
 import s from './Header.module.scss';
 
-// interface Props {
-//   isDarkMode: boolean;
-//   onThemeChange: () => void;
-// }
 
 const Header = () => {
-  // const {isDarkMode, onThemeChange} = props;
   const {isDarkMode, onToggleTheme} = useContext(ThemeContext);
   const [isAuth, setIsAuth] = useState(true);
 
@@ -39,10 +36,10 @@ const Header = () => {
     <>
       <header className={s['header']}>
         <div className={s['container']}>
-          <a href="main" className={s['logo']}>
+          <Link to={ROUTES.MAIN} className={s['logo']}>
             <img className={s['logo__image']} src={headerLogo} alt="logo" />
             <p className={s['logo__text']}>Bookshelf</p>
-          </a>
+          </Link>
           <form className={s['search']}>
             <input
               className={s['search__input']}

@@ -1,8 +1,10 @@
 export const ROUTES = {
   MAIN: '/',
-  FAVORITES: '/favorites',
-  HISTORY: '/history',
-  SIGNUP: '/signup',
-  SIGNIN: '/signin',
+  ITEMS: 'books',
+  FAVORITES: 'favorites',
+  HISTORY: 'history',
+  SEARCH: 'search',
+  SIGNUP: 'signup',
+  SIGNIN: 'signin',
   UNASSIGNED: '*',
 }

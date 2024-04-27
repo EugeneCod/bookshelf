@@ -26,6 +26,9 @@
     text-decoration: none;
     @extend %hover-active-opacity;
   }
+  &__link-active {
+    text-decoration: underline;
+  }
   &__icon {
     width: 15px;
     height: 15px;
@@ -34,9 +37,5 @@
   }
   &__text {
     font-weight: 600;
-  }
-
-  .active {
-    text-decoration: underline;
   }
 }

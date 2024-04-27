@@ -1,14 +1,3 @@
-// :root {
-//   --bg-header-theme-light: #26a9e0;
-//   --bg-main-theme-light: #eaeaea;
-
-//   --bg-header-theme-dark: #1b2c33;
-//   --bg-main-theme-dark: #535353;
-
-//   --bg-color-header: var(--bg-header-theme-light);
-//   --bg-color-main: var(--bg-main-theme-light);
-// }
-
 :root[data-theme="light"] {
   --bg-color-header: #26a9e0;
   --bg-color-main: #eaeaea;
@@ -18,7 +7,6 @@
   --bg-color-header: #1b2c33;
   --bg-color-main: #535353;
 }
-
 
 //colors
 $bg-header: var(--bg-color-header);

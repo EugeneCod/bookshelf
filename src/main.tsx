@@ -1,19 +1,11 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { store } from './app/store/store';
 import App from './App';
 import './styles/index.scss';
 import ThemeProvider from './app/providers/ThemeProvider';
-
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-  },
-], {basename: '/bookshelf'});
 
 const container = document.getElementById('root');
 
@@ -24,7 +16,7 @@ if (container) {
     <React.StrictMode>
       <ThemeProvider>
         <Provider store={store}>
-          <RouterProvider router={router} />
+          <App />
         </Provider>
       </ThemeProvider>
     </React.StrictMode>,
