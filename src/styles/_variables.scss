@@ -1,0 +1,42 @@
+:root {
+  --bg-header-theme-light: #26a9e0;
+  --bg-main-theme-light: #eaeaea;
+
+  --bg-header-theme-dark: #1b2c33;
+  --bg-main-theme-dark: #535353;
+
+  --bg-color-header: var(--bg-header-theme-light);
+  --bg-color-main: var(--bg-main-theme-light);
+}
+
+//colors
+$bg-header: var(--bg-color-header);
+$bg-main: var(--bg-color-main);
+$bg-btn-main: #0c279e;
+$bg-btn-secondary: #ff4c00;
+$font-light: #fff;
+$font-dark: #000;
+$font-contrast: #ff4c00;
+
+//font-sizes
+
+//item-sizes
+$main-container-max-width: 1440px;
+
+//font-families
+$app-font-family: 'Inter', Arial, Helvetica, sans-serif;
+$logo-font-family: 'Fyodor', Arial, Helvetica, sans-serif;
+
+//templates
+%hover-active-opacity {
+  transition: opacity 0.3s;
+  &:hover {
+    opacity: 0.7;
+  }
+  &:active {
+    opacity: 0.4;
+  }
+}
+
+
+

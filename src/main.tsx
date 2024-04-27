@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { store } from './store/store';
 import App from './App';
-import './index.scss';
+import './styles/index.scss';
 
 const router = createBrowserRouter([
   {
