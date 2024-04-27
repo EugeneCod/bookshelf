@@ -3,9 +3,10 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { store } from './store/store';
+import { store } from './app/store/store';
 import App from './App';
 import './styles/index.scss';
+import ThemeProvider from './app/providers/ThemeProvider';
 
 const router = createBrowserRouter([
   {
@@ -21,9 +22,11 @@ if (container) {
 
   root.render(
     <React.StrictMode>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-      </Provider>
+      <ThemeProvider>
+        <Provider store={store}>
+          <RouterProvider router={router} />
+        </Provider>
+      </ThemeProvider>
     </React.StrictMode>,
   );
 } else {

@@ -1,17 +1,19 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { AuthBtn, Navigation, Toggle as ThemeToggle } from '../';
 import headerLogo from '../../assets/img/header_logo.svg';
+import { ThemeContext } from '../../app/contexts/ThemeContext';
 
 import s from './Header.module.scss';
 
-interface Props {
-  isDarkMode: boolean;
-  onThemeChange: () => void;
-}
+// interface Props {
+//   isDarkMode: boolean;
+//   onThemeChange: () => void;
+// }
 
-const Header = (props: Props) => {
-  const {isDarkMode, onThemeChange} = props;
+const Header = () => {
+  // const {isDarkMode, onThemeChange} = props;
+  const {isDarkMode, onToggleTheme} = useContext(ThemeContext);
   const [isAuth, setIsAuth] = useState(true);
 
   function handleLogout() {
@@ -53,7 +55,7 @@ const Header = (props: Props) => {
           {panelContent}
           <div className={s['toggle-theme-container']}>
             <p className={s['toggle-theme-text']}>Switch theme</p>
-            <ThemeToggle value={isDarkMode} onChange={onThemeChange} />
+            <ThemeToggle value={isDarkMode} onChange={onToggleTheme} />
           </div>
         </div>
       </header>
