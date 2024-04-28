@@ -1,0 +1,72 @@
+@import '../../styles/variables.scss';
+
+.auth-form {
+  color: $font-main;
+  background-color: $bg-window;
+  border-radius: 10px;
+  padding: 15px;
+  &__button {
+    background-color: $bg-btn-main;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.21;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 12px;
+    color: $font-light;
+    cursor: pointer;
+    @extend %hover-active-opacity;
+    @media (max-width: 768px) {
+      font-size: 12px;
+    }
+    &_inactive {
+      background-color: $bg-btn-inactive;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+
+  &__inputs-stack {
+    min-height: 375px;
+    @media (max-width: 768px) {
+      min-height: 200px;
+    }
+  }
+  &__fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    display: grid;
+
+  }
+  &__legend {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.2104;
+    margin: 0 0 40px;
+    @media (max-width: 768px) {
+      text-align: center;
+    }
+  }
+  &__notification-block {
+    color: $font-contrast;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.21;
+    margin: 0;
+    padding-bottom: 15px;
+    opacity: 1;
+    transition: opacity, 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    box-sizing: border-box;
+    min-height: 49px;
+    @media (max-width: 768px) {
+      font-size: 10px;;
+    }
+  }
+}

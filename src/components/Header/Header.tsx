@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { AuthBtn, Navigation, Toggle as ThemeToggle } from '../';
 import headerLogo from '../../assets/img/header_logo.svg';
@@ -11,25 +11,26 @@ import s from './Header.module.scss';
 
 const Header = () => {
   const {isDarkMode, onToggleTheme} = useContext(ThemeContext);
-  const [isAuth, setIsAuth] = useState(true);
+  const [isAuth, setIsAuth] = useState(false);
+  const navigate = useNavigate();
 
-  function handleLogout() {
+  function handleLogoutClick() {
     setIsAuth(false);
   }
-  function handleLogin() {
-    // <Navigate to={`/${ROUTES.SIGNIN}`}/>
+  function handleLoginClick() {
+    navigate(ROUTES.SIGNIN);
   }
-  function handleSignup() {}
+  function handleSignupClick() {}
 
   const panelContent = isAuth ? (
     <div className={s['panel']}>
       <Navigation />
-      <AuthBtn text="Log out" onClick={handleLogout} />
+      <AuthBtn text="Log out" onClick={handleLogoutClick} />
     </div>
   ) : (
     <div className={s['panel']}>
-      <AuthBtn text="Log in" onClick={handleLogin} />
-      <AuthBtn text="Sign up" onClick={handleSignup} />
+      <AuthBtn text="Log in" onClick={handleLoginClick} />
+      <AuthBtn text="Sign up" onClick={handleSignupClick} />
     </div>
   );
   return (

@@ -65,14 +65,14 @@ const Login = () => {
             type="password"
             name="password"
             label="Пароль"
-            minLength={undefined}
+            minLength={8}
             maxLength={undefined}
           />
         </AuthForm>
-        <p className="login__redirection">
-          Ещё не зарегистрированы?
-          <NavLink to={ROUTES.SIGNUP} className="login__redirection-link">
-            Регистрация
+        <p className={s['login__redirection']}>
+          Not registered yet?
+          <NavLink to={`/${ROUTES.SIGNUP}`} className={s['login__redirection-link']}>
+            Sign up
           </NavLink>
         </p>
       </div>
