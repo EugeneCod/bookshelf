@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 import { AuthBtn, Navigation, Toggle as ThemeToggle } from '../';
 import headerLogo from '../../assets/img/header_logo.svg';
@@ -17,7 +17,7 @@ const Header = () => {
     setIsAuth(false);
   }
   function handleLogin() {
-    setIsAuth(true);
+    // <Navigate to={`/${ROUTES.SIGNIN}`}/>
   }
   function handleSignup() {}
 

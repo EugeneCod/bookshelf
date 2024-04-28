@@ -9,7 +9,7 @@ const Toggle = (props: Props) => {
   const { value, onChange } = props;
   return (
     <label className={s['switch']}>
-      <input type="checkbox" onClick={onChange} checked={value} />
+      <input type="checkbox" onChange={onChange} checked={value} />
       <span className={s['slider']}></span>
     </label>
   );
