@@ -40,12 +40,12 @@
   }
 
   &__text {
-    font-family: $logo-font-family;
+    // font-family: $logo-font-family;
     color: $font-light;
     text-transform: uppercase;
     position: relative;
     letter-spacing: 0.05em;
-    font-weight: 700;
+    font-weight: 500;
     font-size: 12px;
     margin: 0;
   }
