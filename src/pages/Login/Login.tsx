@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink, Navigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { ROUTES, REGEX, AUTH_ERROR_MESSAGES } from '../../utils/constants';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
@@ -17,17 +17,19 @@ const Login = () => {
     isValid,
   } = useFormAndValidation(false);
 
+  const navigate = useNavigate();
+
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
-  const [submitBtnText, setSubmitBtnText] = useState('Войти');
+  const [submitBtnText, setSubmitBtnText] = useState('Login');
 
   function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
     // TODO добавить логику запроса на авторизацию
     // fetchLogin(values.email, values.password);
-    setSubmitBtnText('Выполнение...');
+    setSubmitBtnText('Processing...');
     setLoginErrorMessage(AUTH_ERROR_MESSAGES.UNIDENTIFIED);
     setTimeout(() => {
-      <Navigate to={`/${ROUTES.MAIN}`} />;
+      navigate(ROUTES.MAIN)
     }, 4000);
   }
 
@@ -53,7 +55,7 @@ const Login = () => {
             name="email"
             label="E-mail"
             minLength={undefined}
-            maxLength={undefined}
+            maxLength={50}
             pattern={REGEX.EMAIL}
           />
           <AuthInput
@@ -64,14 +66,14 @@ const Login = () => {
             onBlur={hadleShiftFocus}
             type="password"
             name="password"
-            label="Пароль"
-            minLength={8}
+            label="Password"
+            minLength={undefined}
             maxLength={undefined}
           />
         </AuthForm>
         <p className={s['login__redirection']}>
           Not registered yet?
-          <NavLink to={`/${ROUTES.SIGNUP}`} className={s['login__redirection-link']}>
+          <NavLink to={ROUTES.SIGNUP} className={s['login__redirection-link']}>
             Sign up
           </NavLink>
         </p>

@@ -20,7 +20,9 @@ const Header = () => {
   function handleLoginClick() {
     navigate(ROUTES.SIGNIN);
   }
-  function handleSignupClick() {}
+  function handleSignupClick() {
+    navigate(ROUTES.SIGNUP);
+  }
 
   const panelContent = isAuth ? (
     <div className={s['panel']}>

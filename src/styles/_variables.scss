@@ -39,12 +39,12 @@ $logo-font-family: 'Fyodor', Arial, Helvetica, sans-serif;
 
 //templates
 %hover-active-opacity {
-  transition: opacity 0.3s;
+  transition: opacity 0.2s;
   &:hover {
-    opacity: 0.7;
+    opacity: 0.8;
   }
   &:active {
-    opacity: 0.4;
+    opacity: 0.6;
   }
 }
 
