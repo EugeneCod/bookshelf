@@ -7,12 +7,9 @@ import { store } from './store/store';
 import App from './App';
 import './index.scss';
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <App />,
-  },
-], {basename: '/bookshelf'});
+const router = createBrowserRouter([{ path: '/', element: <App /> }], {
+  basename: '/bookshelf',
+});
 
 const container = document.getElementById('root');
 
