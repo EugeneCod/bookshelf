@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { getAuth, createUserWithEmailAndPassword  } from 'firebase/auth';
 
 import { ROUTES, REGEX, AUTH_ERROR_MESSAGES } from '../../utils/constants';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
@@ -18,18 +19,27 @@ const Signup = () => {
   } = useFormAndValidation(false);
 
   const navigate = useNavigate();
+  const auth = getAuth();
+  
   const [signupErrorMessage, setSignupErrorMessage] = useState('');
   const [submitBtnText, setSubmitBtnText] = useState('Register');
 
-  function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
-    evt.preventDefault();
-    // TODO добавить логику запроса на авторизацию
-    // fetchSignup(values.email, values.password);
+  function register(email: string, password: string) {
     setSubmitBtnText('Processing...');
-    setSignupErrorMessage(AUTH_ERROR_MESSAGES.EMAIL_CONFLICT);
-    setTimeout(() => {
-      navigate(ROUTES.SIGNIN)
-    }, 4000);
+    createUserWithEmailAndPassword(auth, email, password)
+    .then(() => {
+      navigate(ROUTES.SIGNIN);
+    })
+    .catch((error) => {
+      setSubmitBtnText('Register');
+      error.code === 'auth/email-already-in-use'
+      ? setSignupErrorMessage(AUTH_ERROR_MESSAGES.EMAIL_CONFLICT)
+      : setSignupErrorMessage(AUTH_ERROR_MESSAGES.UNIDENTIFIED)
+    });
+  }
+
+  function handleSignup() {
+    register(values.email, values.password);
   }
 
   return (
@@ -38,7 +48,7 @@ const Signup = () => {
         <AuthForm
           className={s['signup__auth-form']}
           name="signup"
-          onSubmit={handleSubmit}
+          onSubmit={handleSignup}
           title="Welcome!"
           buttonText={submitBtnText}
           isValid={isValid}

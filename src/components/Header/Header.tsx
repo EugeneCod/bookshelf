@@ -1,21 +1,24 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { AuthBtn, Navigation, Toggle as ThemeToggle } from '../';
 import headerLogo from '../../assets/img/header_logo.svg';
 import { ThemeContext } from '../../app/contexts/ThemeContext';
 import { ROUTES } from '../../utils/constants';
+import { useAppDispatch, useAppSelector } from '../../app/store/hooks';
+import { removeUser } from '../../app/store/user/slice';
+import { selectUserIsAuth } from '../../app/store/user/selectors';
 
 import s from './Header.module.scss';
 
-
 const Header = () => {
-  const {isDarkMode, onToggleTheme} = useContext(ThemeContext);
-  const [isAuth, setIsAuth] = useState(false);
+  const { isDarkMode, onToggleTheme } = useContext(ThemeContext);
+  const isAuth = useAppSelector(selectUserIsAuth);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   function handleLogoutClick() {
-    setIsAuth(false);
+    dispatch(removeUser());
   }
   function handleLoginClick() {
     navigate(ROUTES.SIGNIN);

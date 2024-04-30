@@ -6,6 +6,7 @@ import { store } from './app/store/store';
 import App from './App';
 import './styles/index.scss';
 import ThemeProvider from './app/providers/ThemeProvider';
+import './firebase';
 
 const container = document.getElementById('root');
 

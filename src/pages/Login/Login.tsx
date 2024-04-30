@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
+import { useAppDispatch } from '../../app/store/hooks';
 import { ROUTES, REGEX, AUTH_ERROR_MESSAGES } from '../../utils/constants';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 import { AuthForm, AuthInput } from '../../components';
+import { setUser } from '../../app/store/user/slice';
 
 import s from './Login.module.scss';
 
@@ -18,19 +21,32 @@ const Login = () => {
   } = useFormAndValidation(false);
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const auth = getAuth();
 
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
   const [submitBtnText, setSubmitBtnText] = useState('Login');
 
-  function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
-    evt.preventDefault();
-    // TODO добавить логику запроса на авторизацию
-    // fetchLogin(values.email, values.password);
+  function login(email: string, password: string) {
     setSubmitBtnText('Processing...');
-    setLoginErrorMessage(AUTH_ERROR_MESSAGES.UNIDENTIFIED);
-    setTimeout(() => {
-      navigate(ROUTES.MAIN)
-    }, 4000);
+    signInWithEmailAndPassword(auth, email, password)
+      .then(({ user }) => {
+        const { email, uid } = user;
+        dispatch(
+          setUser({
+            email: email,
+            id: uid,
+          }),
+        );
+        navigate(ROUTES.MAIN);
+      })
+      .catch(() => {
+        setLoginErrorMessage(AUTH_ERROR_MESSAGES.UNIDENTIFIED);
+      });
+  }
+
+  function handleLogin() {
+    login(values.email, values.password);
   }
 
   return (
@@ -39,7 +55,7 @@ const Login = () => {
         <AuthForm
           className={s['login__auth-form']}
           name="login"
-          onSubmit={handleSubmit}
+          onSubmit={handleLogin}
           title="We are glad to see you!"
           buttonText={submitBtnText}
           isValid={isValid}

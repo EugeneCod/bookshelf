@@ -26,8 +26,6 @@ const ThemeProvider = (props: Props) => {
 
   function handleToggleTheme() {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
-    // if (theme === themes.light) setTheme(themes.dark)
-    // if (theme === themes.dark) setTheme(themes.light)
   }
 
   useEffect(() => {

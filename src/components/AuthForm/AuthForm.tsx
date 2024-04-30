@@ -5,7 +5,7 @@ import s from './AuthForm.module.scss';
 interface Props {
   children: JSX.Element | JSX.Element[];
   name: string;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  onSubmit: () => void;
   title: string;
   buttonText: string;
   isValid: boolean;
@@ -38,9 +38,14 @@ const AuthForm = (props: Props) => {
     'auth-form__button_inactive': !isValid, // || isLoading
   });
 
+  function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
+    evt.preventDefault();
+    onSubmit()
+  }
+
   return (
     <form
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
       noValidate
       name={name}
       className={formClassNames}

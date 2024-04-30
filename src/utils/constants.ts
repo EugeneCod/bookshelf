@@ -14,7 +14,7 @@ export const REGEX = {
 }
 
 export const AUTH_ERROR_MESSAGES = {
-  EMAIL_CONFLICT: 'Пользователь с таким email уже зарегистрирован',
-  UNIDENTIFIED: 'В процессе авторизации произошла ошибка',
-  INCORRECT_EMAIL_OR_PASSWORD: 'Неправильные почта или пароль',
+  EMAIL_CONFLICT: 'The user with this email has already been registered',
+  UNIDENTIFIED: 'An error occurred during the authorization process',
+  INCORRECT_EMAIL_OR_PASSWORD: 'Incorrect email or password',
 }
