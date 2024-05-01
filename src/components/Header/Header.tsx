@@ -6,8 +6,9 @@ import headerLogo from '../../assets/img/header_logo.svg';
 import { ThemeContext } from '../../app/contexts/ThemeContext';
 import { ROUTES } from '../../utils/constants';
 import { useAppDispatch, useAppSelector } from '../../app/store/hooks';
-import { removeUser } from '../../app/store/user/slice';
+import { logout } from '../../utils/authApi';
 import { selectUserIsAuth } from '../../app/store/user/selectors';
+import { removeUser } from '../../app/store/user/slice';
 
 import s from './Header.module.scss';
 
@@ -17,8 +18,12 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  function handleLogoutClick() {
-    dispatch(removeUser());
+  async function handleLogoutClick() {
+    logout().then(() => {
+      dispatch(removeUser());
+    }).catch((err) => {
+      throw new Error(err)
+    })
   }
   function handleLoginClick() {
     navigate(ROUTES.SIGNIN);

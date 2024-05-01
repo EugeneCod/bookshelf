@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { getAuth, createUserWithEmailAndPassword  } from 'firebase/auth';
 
-import { ROUTES, REGEX, AUTH_ERROR_MESSAGES } from '../../utils/constants';
+import { ROUTES, REGEX } from '../../utils/constants';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 import { AuthForm, AuthInput } from '../../components';
+import { register } from '../../utils/authApi';
 
 import s from './Signup.module.scss';
 
@@ -19,27 +19,20 @@ const Signup = () => {
   } = useFormAndValidation(false);
 
   const navigate = useNavigate();
-  const auth = getAuth();
-  
+
   const [signupErrorMessage, setSignupErrorMessage] = useState('');
   const [submitBtnText, setSubmitBtnText] = useState('Register');
 
-  function register(email: string, password: string) {
+  async function handleSignup() {
     setSubmitBtnText('Processing...');
-    createUserWithEmailAndPassword(auth, email, password)
-    .then(() => {
-      navigate(ROUTES.SIGNIN);
-    })
-    .catch((error) => {
-      setSubmitBtnText('Register');
-      error.code === 'auth/email-already-in-use'
-      ? setSignupErrorMessage(AUTH_ERROR_MESSAGES.EMAIL_CONFLICT)
-      : setSignupErrorMessage(AUTH_ERROR_MESSAGES.UNIDENTIFIED)
-    });
-  }
-
-  function handleSignup() {
-    register(values.email, values.password);
+    register(values.email, values.password)
+      .then(() => {
+        navigate(ROUTES.SIGNIN);
+      })
+      .catch((err) => {
+        setSignupErrorMessage(err);
+        setSubmitBtnText('Register');
+      });
   }
 
   return (
@@ -82,10 +75,7 @@ const Signup = () => {
         </AuthForm>
         <p className={s['signup__redirection']}>
           Already registered?
-          <NavLink
-            to={ROUTES.SIGNIN}
-            className={s['signup__redirection-link']}
-          >
+          <NavLink to={ROUTES.SIGNIN} className={s['signup__redirection-link']}>
             Log in
           </NavLink>
         </p>

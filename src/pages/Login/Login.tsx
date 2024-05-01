@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 import { useAppDispatch } from '../../app/store/hooks';
-import { ROUTES, REGEX, AUTH_ERROR_MESSAGES } from '../../utils/constants';
+import { ROUTES, REGEX } from '../../utils/constants';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 import { AuthForm, AuthInput } from '../../components';
+import { login } from '../../utils/authApi';
 import { setUser } from '../../app/store/user/slice';
 
 import s from './Login.module.scss';
@@ -22,31 +22,21 @@ const Login = () => {
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const auth = getAuth();
 
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
   const [submitBtnText, setSubmitBtnText] = useState('Login');
 
-  function login(email: string, password: string) {
+  async function handleLogin() {
     setSubmitBtnText('Processing...');
-    signInWithEmailAndPassword(auth, email, password)
-      .then(({ user }) => {
-        const { email, uid } = user;
-        dispatch(
-          setUser({
-            email: email,
-            id: uid,
-          }),
-        );
-        navigate(ROUTES.MAIN);
-      })
-      .catch(() => {
-        setLoginErrorMessage(AUTH_ERROR_MESSAGES.UNIDENTIFIED);
-      });
-  }
-
-  function handleLogin() {
-    login(values.email, values.password);
+    login(values.email, values.password)
+    .then((userData) => {
+      dispatch(setUser(userData));
+      navigate(ROUTES.MAIN);
+    })
+    .catch((err) => {
+      setLoginErrorMessage(err);
+      setSubmitBtnText('Login');
+    })
   }
 
   return (

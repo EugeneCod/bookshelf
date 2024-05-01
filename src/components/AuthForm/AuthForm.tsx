@@ -1,5 +1,8 @@
 import classNames from 'classnames/bind';
 
+import { useAppSelector } from '../../app/store/hooks';
+import { selectUserIsLoading } from '../../app/store/user/selectors';
+
 import s from './AuthForm.module.scss';
 
 interface Props {
@@ -25,6 +28,8 @@ const AuthForm = (props: Props) => {
     notification,
   } = props;
 
+  const isLoading = useAppSelector(selectUserIsLoading);
+
   const cx = classNames.bind(s);
 
   const formClassNames = cx({
@@ -34,8 +39,7 @@ const AuthForm = (props: Props) => {
 
   const buttonClassNames = cx({
     'auth-form__button': true,
-    // TODO Добавить глобальный стейт isLoading
-    'auth-form__button_inactive': !isValid, // || isLoading
+    'auth-form__button_inactive': !isValid || isLoading
   });
 
   function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
@@ -58,8 +62,7 @@ const AuthForm = (props: Props) => {
         <button
           type="submit"
           className={buttonClassNames}
-          // TODO Добавить глобальный стейт isLoading
-          disabled={!isValid} // || isLoading
+          disabled={!isValid || isLoading}
         >
           {buttonText}
         </button>

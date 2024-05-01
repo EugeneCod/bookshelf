@@ -1,10 +1,14 @@
 import { RouterProvider } from 'react-router-dom';
 
 import { router } from './app/routes/router';
-
+import { useFirebaseAuth } from './hooks/useFirebaseAuth';
+import { Preloader } from './components';
 
 const App = () => {
-  return (
+  const { isCheckAuth } = useFirebaseAuth();
+  return isCheckAuth ? (
+    <Preloader />
+  ) : (
     <div className="app">
       <RouterProvider router={router} />
     </div>
