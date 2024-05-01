@@ -1,4 +1,5 @@
 import { RouterProvider } from 'react-router-dom';
+import { withErrorBoundary } from 'react-error-boundary';
 
 import { router } from './app/routes/router';
 import { useFirebaseAuth } from './hooks/useFirebaseAuth';
@@ -15,4 +16,6 @@ const App = () => {
   );
 };
 
-export default App;
+export default withErrorBoundary(App, {
+  fallback: <h1>Something went wrong.</h1>,
+});
