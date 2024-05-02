@@ -1,0 +1,41 @@
+@import '../../styles/variables';
+
+.nav {
+  display: flex;
+  align-items: center;
+  &__list {
+    padding: 0;
+    margin: 0;
+    display: flex;
+
+    @media (max-width: 768px) {
+      display: initial;
+    }
+  }
+  &__list-item {
+    display: flex;
+    flex-direction: column;
+    row-gap: 3px;
+  }
+  &__link {
+    display: flex;
+    align-items: center;
+    column-gap: 3px;
+    color: $font-light;
+    padding: 5px;
+    text-decoration: none;
+    @extend %hover-active-opacity;
+  }
+  &__link-active {
+    text-decoration: underline;
+  }
+  &__icon {
+    width: 15px;
+    height: 15px;
+    background-color: #fff;
+    border-radius: 50%;
+  }
+  &__text {
+    font-weight: 600;
+  }
+}

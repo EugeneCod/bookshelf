@@ -1,0 +1,16 @@
+@import '../../styles/variables';
+
+.button {
+  background-color: $bg-btn-secondary;
+  border: none;
+  cursor: pointer;
+  width: auto;
+  padding: 12px;
+  border-style: none;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  @extend %hover-active-opacity;
+}

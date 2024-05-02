@@ -1,15 +1,12 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { store } from './store/store';
+import { store } from './app/store/store';
 import App from './App';
-import './index.scss';
-
-const router = createBrowserRouter([{ path: '/', element: <App /> }], {
-  basename: '/bookshelf',
-});
+import './styles/index.scss';
+import ThemeProvider from './app/providers/ThemeProvider';
+import './firebase';
 
 const container = document.getElementById('root');
 
@@ -18,9 +15,11 @@ if (container) {
 
   root.render(
     <React.StrictMode>
-      <Provider store={store}>
-        <RouterProvider router={router} />
-      </Provider>
+      <ThemeProvider>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </ThemeProvider>
     </React.StrictMode>,
   );
 } else {
