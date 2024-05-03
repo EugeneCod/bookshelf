@@ -1,12 +1,15 @@
 import { Outlet } from 'react-router-dom';
+import { Suspense } from 'react';
 
-import { Header } from '../../components';
+import { Header, Preloader } from '../../components';
 
 const MainLayout = () => {
   return (
     <>
       <Header />
-      <Outlet />
+      <Suspense fallback={<Preloader />}>
+        <Outlet />
+      </Suspense>
     </>
   );
 };
