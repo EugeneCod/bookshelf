@@ -1,4 +1,4 @@
-:root[data-theme="light"] {
+:root[data-theme='light'] {
   --bg-color-header: #26a9e0;
   --bg-color-window: #b9e9fd;
   --bg-color-main: #eaeaea;
@@ -6,7 +6,7 @@
   --font-color-secondary: #3c3c3c;
 }
 
-:root[data-theme="dark"] {
+:root[data-theme='dark'] {
   --bg-color-header: #1b2c33;
   --bg-color-window: #1b2c33;
   --bg-color-main: #09212b;
@@ -48,5 +48,12 @@ $logo-font-family: 'Fyodor', Arial, Helvetica, sans-serif;
   }
 }
 
+%side-container-padding {
+  padding-left: 30px;
+  padding-right: 30px;
 
-
+  @media (max-width: 768px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}

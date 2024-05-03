@@ -1,6 +1,6 @@
 export {default as Favorites} from './Favorites/Favorites';
 export {default as Home} from './Home/Home';
-export {default as Item} from './Item/Item';
+export {default as Item} from './Book/Book';
 export {default as Login} from './Login/Login';
 export {default as NotFound} from './NotFound/NotFound';
 export {default as SearchCurrent} from './SearchCurrent/SearchCurrent';

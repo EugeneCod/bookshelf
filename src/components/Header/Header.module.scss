@@ -14,13 +14,13 @@
   grid-template-columns: 90px auto 350px;
   column-gap: 20px;
   align-items: center;
-  padding: 30px 30px 20px 30px;
+  padding-top: 30px;
+  padding-bottom: 20px;
   box-sizing: border-box;
   position: relative;
+  @extend %side-container-padding;
 
   @media (max-width: 768px) {
-    padding-left: 10px;
-    padding-right: 10px;
     padding-bottom: 10px;
     grid-template-columns: 90px auto 240px;
   }
@@ -28,7 +28,7 @@
 
 .logo {
   display: flex;
-  
+
   flex-direction: column;
   align-items: center;
   text-decoration: none;
@@ -40,7 +40,6 @@
   }
 
   &__text {
-    // font-family: $logo-font-family;
     color: $font-light;
     text-transform: uppercase;
     position: relative;
@@ -55,6 +54,7 @@
   display: flex;
   position: relative;
   justify-content: flex-end;
+
   &__input {
     width: 100%;
     max-width: 600px;
@@ -71,6 +71,7 @@
       font-size: 12px;
     }
   }
+
   &__btn {
     position: absolute;
     right: -2px;
