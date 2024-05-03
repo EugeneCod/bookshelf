@@ -1,19 +1,19 @@
+import { lazy } from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 
 import { MainLayout } from '../../layouts';
-import {
-  Favorites,
-  Home,
-  Item,
-  Login,
-  NotFound,
-  SearchCurrent,
-  SearchHistory,
-  Signup,
-} from '../../pages';
 import { ROUTES } from '../../utils/constants';
 
 import { ProtectedRoute } from './ProtectedRoute/ProtectedRoute';
+
+const Book = lazy(() => import('../../pages/Book/Book'))
+const Favorites = lazy(() => import('../../pages/Favorites/Favorites'))
+const Home = lazy(() => import('../../pages/Home/Home'))
+const Login = lazy(() => import('../../pages/Login/Login'))
+const NotFound = lazy(() => import('../../pages/NotFound/NotFound'))
+const SearchCurrent = lazy(() => import('../../pages/SearchCurrent/SearchCurrent'))
+const SearchHistory = lazy(() => import('../../pages/SearchHistory/SearchHistory'))
+const Signup = lazy(() => import('../../pages/Signup/Signup'))
 
 export const router = createBrowserRouter(
   [
@@ -39,8 +39,8 @@ export const router = createBrowserRouter(
           element: <SearchCurrent />,
         },
         {
-          path: `${ROUTES.ITEMS}/:id`,
-          element: <Item />,
+          path: `${ROUTES.BOOK}/:id`,
+          element: <Book />,
         },
         {
           path: ROUTES.FAVORITES,

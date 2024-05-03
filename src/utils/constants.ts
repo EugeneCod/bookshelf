@@ -1,6 +1,6 @@
 export const ROUTES = {
   MAIN: '/',
-  ITEMS: '/books',
+  BOOK: '/book',
   FAVORITES: '/favorites',
   HISTORY: '/history',
   SEARCH: '/search',
