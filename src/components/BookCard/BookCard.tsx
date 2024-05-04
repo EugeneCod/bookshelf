@@ -6,11 +6,11 @@ import LikeBtn from '../LikeBtn/LikeBtn';
 
 import s from './BookCard.module.scss';
 
-import type { LocalBookFullData } from '../../@types.ts/booksApi';
+import type { LocalBookShortData } from '../../app/store/books/types';
 
 interface Props {
-  card: LocalBookFullData;
-  onCardLike: (card: LocalBookFullData) => void;
+  card: LocalBookShortData;
+  onCardLike: (card: LocalBookShortData) => void;
 }
 
 const BookCard = (props: Props) => {
@@ -30,7 +30,7 @@ const BookCard = (props: Props) => {
       <Link
         to={`${ROUTES.BOOK}/${card.id}`}
         className={s['card__image-container']}
-        style={{ backgroundImage: `url(${card.imageLinks.smallThumbnail})` }}
+        style={{ backgroundImage: `url(${card.imageLink})` }}
       />
       <div className={s['card__text-container']}>
         <p className={s['card__title']}>{card.title}</p>
