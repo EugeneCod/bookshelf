@@ -6,4 +6,6 @@ export { default as Header } from './Header/Header';
 export { default as LikeBtn } from './LikeBtn/LikeBtn';
 export { default as Navigation } from './Navigation/Navigation';
 export { default as Preloader } from './Preloader/Preloader';
+export { default as SearchForm } from './SearchForm/SearchForm';
+export { default as Suggestions } from './Suggestions/Suggestions';
 export { default as Toggle } from './Toggle/Toggle';

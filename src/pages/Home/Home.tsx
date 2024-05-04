@@ -6,7 +6,7 @@ import s from './Home.module.scss';
 import type { LocalBookShortData } from '../../app/store/books/types';
 
 const Home = () => {
-  const { data = [], isLoading } = useGetBooksQuery({ search: 'маркс' });
+  const { data = [], isLoading } = useGetBooksQuery({ search: 'незнайка' });
 
   function handleCardLike(bookData: LocalBookShortData) {}
 
