@@ -27,11 +27,23 @@
     display: grid;
     row-gap: 15px;
   }
+  &__message {
+    color: $font-secondary;
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
   &__preloader {
     color: $font-secondary;
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
   }
   &__error {
     color: $font-contrast;
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }
 

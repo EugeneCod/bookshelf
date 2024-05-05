@@ -1,7 +1,7 @@
 :root[data-theme='light'] {
   --bg-color-header: #26a9e0;
   --bg-color-window: #b9e9fd;
-  --bg-color-main: #eaeaea;
+  --bg-color-main: #f9f9f9;
   --shadow-menu: 0 10px 20px -2px rgba(0, 0, 0, 0.4);
   --font-color-main: #101010;
   --font-color-secondary: #3c3c3c;
@@ -15,11 +15,7 @@
   --font-color-main: #f5f5f5;
   --font-color-secondary: #999999;
 }
-//drop-down menu
-// background-color: #3d3d3d; card
-//box-shadow: 0 10px 20px -2px rgba(255, 255, 255, 0.4);
-//box-shadow: 0 10px 20px -2px rgba(0,0,0,.4);
-//colors
+
 $bg-header: var(--bg-color-header);
 $bg-main: var(--bg-color-main);
 $bg-window: var(--bg-color-window);
