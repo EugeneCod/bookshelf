@@ -1,13 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import { BOOKS_API } from '../../../utils/constants';
-import stubImage from '../../../assets/img/stub-image.png';
+import { transformResBook, transformResBooks } from '../../../utils/booksApi';
 
 import type {
-  ApiBooksLiteData,
   LocalBookShortData,
   LocalBookFullData,
-  ApiBooksFullItem,
   SearchQuery,
 } from './types';
 
@@ -29,38 +27,11 @@ export const booksApi = createApi({
           [KEY]: import.meta.env.VITE_FIREBASE_API_KEY,
         },
       }),
-      transformResponse: ({ items }: ApiBooksLiteData) =>
-        items
-          ? items.map((item) => ({
-              id: item.id,
-              title: item.volumeInfo.title,
-              authors:
-                item.volumeInfo.authors?.join(', ') ||
-                'The authors is not specified',
-              imageLink: item.volumeInfo.imageLinks?.thumbnail || stubImage,
-            }))
-          : [],
+      transformResponse: transformResBooks,
     }),
     getBookById: builder.query<LocalBookFullData, string | undefined>({
       query: (id) => `${BOOKS_PATH}/${id}`,
-      transformResponse: (item: ApiBooksFullItem) => ({
-        id: item.id,
-        title: item.volumeInfo.title,
-        authors:
-          item.volumeInfo.authors?.join(', ') || 'The authors is not specified',
-        imageLink: item.volumeInfo.imageLinks?.medium || stubImage,
-        averageRating: item.volumeInfo.averageRating?.toString() || 'n/a',
-        categories:
-          item.volumeInfo.categories?.join(', ') ||
-          'Categories are not specified',
-        description:
-          item.volumeInfo.description || 'The description is not specified',
-        pageCount: item.volumeInfo.pageCount?.toString() || 'n/a',
-        publishedDate:
-          item.volumeInfo.publishedDate ||
-          'The publication date is not specified',
-        previewLink: item.volumeInfo.previewLink || '/',
-      }),
+      transformResponse: transformResBook,
     }),
   }),
 });
