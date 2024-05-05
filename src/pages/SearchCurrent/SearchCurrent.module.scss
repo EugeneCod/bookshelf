@@ -5,9 +5,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
   &__container {
+    width: 100%;
+    max-width: $main-container-max-width;
+    box-sizing: border-box;
     @extend %side-container-padding;
   }
+
   &__title {
     color: $font-main;
     text-align: center;
@@ -15,5 +20,13 @@
     margin-bottom: 25px;
     font-size: 30px;
     font-weight: 600;
+  }
+
+  &__message {
+    color: $font-secondary;
+    text-align: center;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
   }
 }

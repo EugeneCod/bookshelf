@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { AuthBtn, Navigation, Toggle as ThemeToggle } from '../';
+import { AuthBtn, Navigation, SearchForm, Toggle as ThemeToggle } from '../';
 import headerLogo from '../../assets/img/header_logo.svg';
 import { ThemeContext } from '../../app/contexts/ThemeContext';
 import { ROUTES } from '../../utils/constants';
@@ -19,11 +19,13 @@ const Header = () => {
   const dispatch = useAppDispatch();
 
   async function handleLogoutClick() {
-    logout().then(() => {
-      dispatch(removeUser());
-    }).catch((err) => {
-      throw new Error(err)
-    })
+    logout()
+      .then(() => {
+        dispatch(removeUser());
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
   }
   function handleLoginClick() {
     navigate(ROUTES.SIGNIN);
@@ -51,15 +53,9 @@ const Header = () => {
             <img className={s['logo__image']} src={headerLogo} alt="logo" />
             <p className={s['logo__text']}>Bookshelf</p>
           </Link>
-          <form className={s['search']}>
-            <input
-              className={s['search__input']}
-              placeholder="Search on the bookshelf"
-            />
-            <button className={s['search__btn']} type="button">
-              Find
-            </button>
-          </form>
+          <div className={s['search-container']}>
+            <SearchForm />
+          </div>
           {panelContent}
           <div className={s['toggle-theme-container']}>
             <p className={s['toggle-theme-text']}>Switch theme</p>

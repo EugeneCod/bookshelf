@@ -1,0 +1,86 @@
+@import '../../styles/variables';
+
+.menu {
+  position: absolute;
+  left: 0;
+  top: 50px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-radius: 12px;
+  background-color: $bg-main;
+  z-index: 3;
+  box-shadow: $shadow-menu;
+  max-height: 350px;
+  overflow-y: scroll;
+  width: 100%;
+  
+  &__title {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: $font-secondary;
+  }
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    row-gap: 15px;
+  }
+  &__message {
+    color: $font-secondary;
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  &__preloader {
+    color: $font-secondary;
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  &__error {
+    color: $font-contrast;
+    text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+.menu-card {
+  display: grid;
+  padding-left: 15px;
+  padding-right: 15px;
+  grid-template-columns: auto 1fr;
+  column-gap: 8px;
+  row-gap: 5px;
+  color: $font-main;
+  cursor: pointer;
+  text-decoration: none;
+  &:hover {
+    background-color: $bg-window;
+  }
+
+  &__image {
+    grid-row: 1/3;
+    grid-column: 1/2;
+    display: block;
+    width: 50px;
+    height: 67px;
+    object-fit: cover;
+    object-position: center;
+  }
+  &__title {
+    grid-row: 1/2;
+    grid-column: 2/3;
+    font-size: 14px;
+    margin-bottom: 0;
+    margin-top: 3px;
+  }
+  &__authors {
+    grid-row: 2/3;
+    grid-column: 2/3;
+    font-size: 12px;
+    margin: 0;
+  }
+}
