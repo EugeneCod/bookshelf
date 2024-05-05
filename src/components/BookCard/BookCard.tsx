@@ -10,11 +10,10 @@ import type { LocalBookShortData } from '../../app/store/books/types';
 
 interface Props {
   card: LocalBookShortData;
-  onCardLike: (card: LocalBookShortData) => void;
 }
 
 const BookCard = (props: Props) => {
-  const { card, onCardLike } = props;
+  const { card } = props;
   // TODO синхронизировать состояние лайка с хранилищем
   // const isLiked = useAppSelector((state) => state.favorites.some(item.id === props.card.id))
   const [isLiked, setIsLiked] = useState(false);
@@ -22,7 +21,6 @@ const BookCard = (props: Props) => {
 
   function handleLikeClick() {
     setIsLiked((pending) => !pending);
-    onCardLike(card);
   }
 
   return (

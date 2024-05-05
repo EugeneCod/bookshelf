@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import Suggestions from '../Suggestions/Suggestions';
 import { useDebounce } from '../../hooks/useDebounce';
@@ -8,7 +8,9 @@ import { ROUTES } from '../../utils/constants';
 import s from './SearchForm.module.scss';
 
 const SearchForm = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [URLSearchParams] = useSearchParams();
+  const searchQueryFromParams = URLSearchParams.get('q') ?? '';
+  const [searchQuery, setSearchQuery] = useState(searchQueryFromParams);
   const [suggestionsOpened, setSuggestionsOpened] = useState(false);
   const navigate = useNavigate();
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
@@ -29,6 +31,7 @@ const SearchForm = () => {
   function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
     searchQuery && searchBooks();
+    setSuggestionsOpened(false);
   }
 
   function searchBooks() {

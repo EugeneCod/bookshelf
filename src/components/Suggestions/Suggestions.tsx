@@ -23,9 +23,10 @@ const Suggestions = (props: Props) => {
     },
     { skip: !searchQuery },
   );
+
   return (
     <div className={s['menu']}>
-      {!!booksData && (
+      {!!booksData && !!booksData.length ? (
         <>
           <p className={s['menu__title']}>Perhaps you were looking for</p>
           <ul className={s['menu__list']}>
@@ -48,6 +49,8 @@ const Suggestions = (props: Props) => {
             })}
           </ul>
         </>
+      ) : (
+        <p className={s['menu__message']}>Nothing was found for your query</p>
       )}
       {isLoading && <p className={s['menu__preloader']}>Searching...</p>}
       {isError && <p className={s['menu__error']}>An error has occurred!</p>}

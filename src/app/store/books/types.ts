@@ -37,7 +37,7 @@ export interface ApiBooksFullItem {
 }
 
 export interface ApiBooksLiteData {
-  items: ApiBooksLiteItem[];
+  items?: ApiBooksLiteItem[];
   kind: string;
   totalItems: number;
 }

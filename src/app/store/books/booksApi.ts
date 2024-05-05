@@ -30,14 +30,16 @@ export const booksApi = createApi({
         },
       }),
       transformResponse: ({ items }: ApiBooksLiteData) =>
-        items.map((item) => ({
-          id: item.id,
-          title: item.volumeInfo.title,
-          authors:
-            item.volumeInfo.authors?.join(', ') ||
-            'The authors is not specified',
-          imageLink: item.volumeInfo.imageLinks?.thumbnail || stubImage,
-        })),
+        items
+          ? items.map((item) => ({
+              id: item.id,
+              title: item.volumeInfo.title,
+              authors:
+                item.volumeInfo.authors?.join(', ') ||
+                'The authors is not specified',
+              imageLink: item.volumeInfo.imageLinks?.thumbnail || stubImage,
+            }))
+          : [],
     }),
     getBookById: builder.query<LocalBookFullData, string | undefined>({
       query: (id) => `${BOOKS_PATH}/${id}`,
