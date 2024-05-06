@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import Suggestions from '../Suggestions/Suggestions';
 import { useDebounce } from '../../hooks/useDebounce';
+import { useHistory } from '../../hooks/useHistory';
 import { ROUTES } from '../../utils/constants';
 
 import s from './SearchForm.module.scss';
@@ -14,6 +15,7 @@ const SearchForm = () => {
   const [suggestionsOpened, setSuggestionsOpened] = useState(false);
   const navigate = useNavigate();
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
+  const { addHistory } = useHistory();
 
   function handleChangeInput(evt: React.ChangeEvent<HTMLInputElement>) {
     setSearchQuery(evt.target.value);
@@ -30,8 +32,19 @@ const SearchForm = () => {
 
   function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
-    searchQuery && searchBooks();
+    searchBooks();
     setSuggestionsOpened(false);
+
+    const currentDate = new Date();
+    const dateTime = `${currentDate.toTimeString().slice(0, 8)},
+      ${currentDate.toLocaleDateString('en-US', {
+        weekday: 'long',
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+      })}`;
+
+    addHistory({ dateTime, searchQuery });
   }
 
   function searchBooks() {
@@ -49,7 +62,11 @@ const SearchForm = () => {
         onBlur={handleBlurInput}
         onFocus={handleFocusInput}
       />
-      <button className={s['search__btn']} type="submit">
+      <button
+        disabled={!searchQuery}
+        className={s['search__btn']}
+        type="submit"
+      >
         Find
       </button>
       {suggestionsOpened && (
