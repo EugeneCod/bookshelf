@@ -1,17 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { UserSliceState } from './types';
+import type { SetUserPayload, UserSliceState } from './types';
 
 const initialState: UserSliceState = {
   email: null,
   id: null,
   isLoading: false,
-};
-
-type SetUserPayload = {
-  email: string | null;
-  id: string;
 };
 
 const userSlice = createSlice({

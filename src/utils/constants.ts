@@ -20,6 +20,19 @@ export const AUTH_ERROR_MESSAGES = {
   LOGOUT_ERROR: 'Unknown logout error',
 };
 
+export const DATABASE_ERROR_MESSAGES = {
+  HISTORY: {
+    ADD_ERROR: 'Failed to add history data',
+    REMOVE_ERROR: 'History data could not be deleted',
+    GET_ERROR: 'History data could not be retrieved',
+  },
+  FAVORITES: {
+    ADD_ERROR: 'Failed to add favorites data',
+    REMOVE_ERROR: 'Favorites data could not be deleted',
+    GET_ERROR: 'Favorites data could not be retrieved',
+  },
+};
+
 export const BOOKS_API = {
   BASE_URL: 'https://www.googleapis.com/books/v1',
   BOOKS_PATH: '/volumes',

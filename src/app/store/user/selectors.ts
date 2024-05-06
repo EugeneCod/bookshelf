@@ -12,4 +12,8 @@ export const selectUserIsLoading = createSelector(selectUser, (user) => {
   return user.isLoading;
 });
 
+export const selectUserId = createSelector(selectUser, (user) => {
+  return user.id;
+});
+
 
