@@ -3,7 +3,8 @@
 .search {
   display: flex;
   position: relative;
-  justify-content: flex-end;
+  width: 100%;
+  max-width: 660px;
 
   @media (max-width: 768px) {
     flex: 1 1 100%;

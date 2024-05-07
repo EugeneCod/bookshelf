@@ -6,14 +6,64 @@
   flex-direction: column;
   align-items: center;
   &__container {
-    @extend %side-container-padding;
+    box-sizing: border-box;
+    max-width: 650px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    @media (max-width: 768px) {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
   }
   &__title {
     color: $font-main;
     text-align: center;
     margin-top: 0;
-    margin-bottom: 25px;
-    font-size: 30px;
+    margin-bottom: 15px;
+    font-size: 20px;
     font-weight: 600;
+  }
+}
+
+.history {
+  padding-top: 40px;
+  position: relative;
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+  }
+  &__clear-btn {
+    font-weight: 500;
+    font-size: 14px;
+    background-color: $bg-btn-secondary;
+    border: 1px solid $border;
+    cursor: pointer;
+    padding: 7px;
+    border-radius: 12px;
+    color: $font-light;
+    position: absolute;
+    top: 0;
+    right: 0;
+    @extend %hover-active-opacity;
+  }
+
+  &__error {
+    color: $font-contrast;
+    text-align: center;
+    margin: 0;
+    font-size: 16px;
+  }
+
+  &__no-data {
+    color: $font-secondary;
+    text-align: center;
+    margin: 0;
+    font-size: 16px;
   }
 }
