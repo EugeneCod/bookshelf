@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { ROUTES } from '../../utils/constants';
@@ -22,7 +23,10 @@ const HistoryItem = (props: Props) => {
           onRemove(historyId);
         }}
       ></button>
-      <Link className={s['item__link']} to={`${ROUTES.SEARCH}?q=${searchQuery}`}>
+      <Link
+        className={s['item__link']}
+        to={`${ROUTES.SEARCH}?q=${searchQuery}`}
+      >
         <p className={s['item__search-query']}>"{searchQuery}"</p>
         <p className={s['item__datetime']}>{dateTime}</p>
       </Link>
@@ -31,3 +35,10 @@ const HistoryItem = (props: Props) => {
 };
 
 export default HistoryItem;
+
+HistoryItem.propTypes = {
+  searchQuery: PropTypes.string.isRequired,
+  historyId: PropTypes.string.isRequired,
+  dateTime: PropTypes.string.isRequired,
+  onRemove: PropTypes.func.isRequired,
+};
