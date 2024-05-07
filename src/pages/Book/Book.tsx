@@ -1,21 +1,28 @@
-import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { useFavorites } from '../../hooks/useFavorites';
 import { LikeBtn, Preloader } from '../../components';
 import { useGetBookByIdQuery } from '../../app/store/books/booksApi';
+import { Status } from '../../app/store/favorites/types';
 
 import s from './Book.module.scss';
 
 const Book = () => {
   const { id } = useParams();
+  const { checkIsLiked, status, addToFavorites, removeFromFavorites } =
+    useFavorites();
+  const { data: bookData, isLoading, isError } = useGetBookByIdQuery(id);
 
-  // TODO синхронизировать состояние лайка с хранилищем
-  const [isLiked, setIsLiked] = useState(false);
-
-  const { data: bookData, isLoading } = useGetBookByIdQuery(id);
+  const isLiked = checkIsLiked(id);
 
   function handleLikeClick() {
-    setIsLiked((pending) => !pending);
+    if (status === Status.LOADING || !bookData) {
+      return;
+    }
+    const { id, title, authors, imageLink } = bookData;
+    !isLiked
+      ? addToFavorites({ id, title, authors, imageLink })
+      : removeFromFavorites(id);
   }
 
   return (
@@ -60,6 +67,7 @@ const Book = () => {
           </div>
         )}
         {isLoading && <Preloader />}
+        {isError && <p className={s['page__error-message']}>An error occurred while uploading information about the book...</p>}
       </div>
     </main>
   );

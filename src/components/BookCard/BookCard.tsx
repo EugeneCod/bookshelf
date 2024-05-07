@@ -1,8 +1,9 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { ROUTES } from '../../utils/constants';
-import LikeBtn from '../LikeBtn/LikeBtn';
+import { LikeBtn } from '../';
+import { useFavorites } from '../../hooks/useFavorites';
+import { Status } from '../../app/store/favorites/types';
 
 import s from './BookCard.module.scss';
 
@@ -14,13 +15,15 @@ interface Props {
 
 const BookCard = (props: Props) => {
   const { card } = props;
-  // TODO синхронизировать состояние лайка с хранилищем
-  // const isLiked = useAppSelector((state) => state.favorites.some(item.id === props.card.id))
-  const [isLiked, setIsLiked] = useState(false);
-
+  const { status, addToFavorites, removeFromFavorites, checkIsLiked } =
+    useFavorites();
+  const isLiked = checkIsLiked(card.id);
 
   function handleLikeClick() {
-    setIsLiked((pending) => !pending);
+    if (status === Status.LOADING) {
+      return;
+    }
+    !isLiked ? addToFavorites(card) : removeFromFavorites(card.id);
   }
 
   return (

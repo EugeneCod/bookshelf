@@ -28,5 +28,16 @@ export const useFavorites = () => {
     userId && dispatch(removeFavoritesBook({ userId, bookId }));
   }
 
-  return { favorites, status, error, addToFavorites, removeFromFavorites };
+  function checkIsLiked(bookId: string | undefined) {
+    return bookId ? favorites.some(({ id }) => id === bookId) : false;
+  }
+
+  return {
+    favorites,
+    status,
+    error,
+    addToFavorites,
+    removeFromFavorites,
+    checkIsLiked,
+  };
 };
