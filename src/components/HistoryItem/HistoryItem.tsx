@@ -12,12 +12,9 @@ interface Props {
 }
 
 const HistoryItem = (props: Props) => {
-  const {searchQuery, historyId, dateTime, onRemove} = props;
+  const { searchQuery, historyId, dateTime, onRemove } = props;
   return (
-    <Link
-      to={`${ROUTES.SEARCH}?q=${searchQuery}`}
-      className={s['item']}
-    >
+    <li className={s['item']}>
       <button
         className={s['item__remove-btn']}
         type="button"
@@ -25,9 +22,11 @@ const HistoryItem = (props: Props) => {
           onRemove(historyId);
         }}
       ></button>
-      <p className={s['item__search-query']}>"{searchQuery}"</p>
-      <p className={s['item__datetime']}>{dateTime}</p>
-    </Link>
+      <Link className={s['item__link']} to={`${ROUTES.SEARCH}?q=${searchQuery}`}>
+        <p className={s['item__search-query']}>"{searchQuery}"</p>
+        <p className={s['item__datetime']}>{dateTime}</p>
+      </Link>
+    </li>
   );
 };
 

@@ -4,7 +4,6 @@ import { Status } from '../../app/store/history/types';
 
 import s from './SearchHistory.module.scss';
 
-
 const SearchHistory = () => {
   const { history, status, error, removeHistory, clearHistory } = useHistory();
   let content: JSX.Element;
@@ -22,7 +21,13 @@ const SearchHistory = () => {
         </button>
         <ul className={s['history__list']}>
           {history.map(({ historyId, dateTime, searchQuery }) => (
-            <HistoryItem key={historyId} historyId={historyId} dateTime={dateTime} searchQuery={searchQuery} onRemove={removeHistory}/>
+            <HistoryItem
+              key={historyId}
+              historyId={historyId}
+              dateTime={dateTime}
+              searchQuery={searchQuery}
+              onRemove={removeHistory}
+            />
           ))}
         </ul>
       </>
