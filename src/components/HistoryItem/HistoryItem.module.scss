@@ -1,0 +1,52 @@
+@import '../../styles/variables';
+
+.item {
+  text-decoration: none;
+  cursor: pointer;
+  display: grid;
+  border-radius: 12px;
+  grid-template-columns: min-content 1fr auto;
+  align-items: center;
+  column-gap: 20px;
+  min-height: 38px;
+  padding-left: 10px;
+  padding-right: 10px;
+  box-shadow: -2px 4px 3px -2px $shadow-menu-color;
+  &:hover {
+    background-color: $bg-window;
+  }
+
+  &__remove-btn {
+    background: none;
+    border: none;
+    background-image: url(../../assets/img/cross.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 15px 15px;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    padding: 15px;
+    @extend %hover-active-opacity;
+  }
+
+  &__search-query {
+    color: $font-main;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
+  }
+
+  &__datetime {
+    color: $font-secondary;
+    margin: 0;
+    font-size: 14px;
+    @media (max-width: 768px) {
+      font-size: 12px;
+    }
+  }
+}
