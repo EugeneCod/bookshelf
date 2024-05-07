@@ -1,35 +1,33 @@
 import {
   selectFavoritesStatus,
   selectFavoritesError,
-  selectFavoritesBooks,
+  selectFavoritesIds,
 } from '../app/store/favorites/selectors';
 import { useAppDispatch, useAppSelector } from '../app/store/hooks';
 import { selectUserId } from '../app/store/user/selectors';
 import {
-  addFavoritesBook,
-  removeFavoritesBook,
+  addFavoritesId,
+  removeFavoritesId,
 } from '../app/store/favorites/slice';
-
-import type { LocalBookShortData } from '../app/store/books/types';
 
 export const useFavorites = () => {
   const dispatch = useAppDispatch();
 
   const userId = useAppSelector(selectUserId);
-  const favorites = useAppSelector(selectFavoritesBooks);
+  const favorites = useAppSelector(selectFavoritesIds);
   const status = useAppSelector(selectFavoritesStatus);
   const error = useAppSelector(selectFavoritesError);
 
-  function addToFavorites(bookData: LocalBookShortData) {
-    userId && dispatch(addFavoritesBook({ userId, bookData }));
+  function addToFavorites(bookId: string) {
+    userId && dispatch(addFavoritesId({ userId, bookId }));
   }
 
   function removeFromFavorites(bookId: string) {
-    userId && dispatch(removeFavoritesBook({ userId, bookId }));
+    userId && dispatch(removeFavoritesId({ userId, bookId }));
   }
 
   function checkIsLiked(bookId: string | undefined) {
-    return bookId ? favorites.some(({ id }) => id === bookId) : false;
+    return bookId ? favorites.includes(bookId) : false;
   }
 
   return {

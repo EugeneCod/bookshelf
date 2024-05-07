@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useFavorites } from '../../hooks/useFavorites';
 import { LikeBtn, Preloader } from '../../components';
 import { useGetBookByIdQuery } from '../../app/store/books/booksApi';
-import { Status } from '../../app/store/favorites/types';
+import { Status } from '../../app/@types/';
 import { useAppSelector } from '../../app/store/hooks';
 import { selectUserIsAuth } from '../../app/store/user/selectors';
 
@@ -22,10 +22,9 @@ const Book = () => {
     if (status === Status.LOADING || !bookData) {
       return;
     }
-    const { id, title, authors, imageLink } = bookData;
     !isLiked
-      ? addToFavorites({ id, title, authors, imageLink })
-      : removeFromFavorites(id);
+      ? addToFavorites(bookData.id)
+      : removeFromFavorites(bookData.id);
   }
 
   return (

@@ -1,6 +1,6 @@
 import { HistoryItem } from '../../components';
 import { useHistory } from '../../hooks/useHistory';
-import { Status } from '../../app/store/history/types';
+import { Status } from '../../app/@types/';
 
 import s from './SearchHistory.module.scss';
 

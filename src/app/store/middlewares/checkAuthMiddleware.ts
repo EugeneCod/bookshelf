@@ -1,6 +1,6 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit';
 
-import { clearFaforites, getFavoritesBooks } from '../favorites/slice';
+import { clearFaforites, getFavoritesIds } from '../favorites/slice';
 import { clearHistory, getUserHistory } from '../history/slice';
 import { removeUser, setUser } from '../user/slice';
 
@@ -19,7 +19,7 @@ startTypedListening({
   actionCreator: setUser,
   effect: (action, { dispatch }) => {
     dispatch(getUserHistory({ userId: action.payload.id }));
-    dispatch(getFavoritesBooks({ userId: action.payload.id }));
+    dispatch(getFavoritesIds({ userId: action.payload.id }));
   },
 });
 

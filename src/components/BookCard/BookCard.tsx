@@ -4,7 +4,7 @@ import { ROUTES } from '../../utils/constants';
 import { LikeBtn } from '../';
 import { useFavorites } from '../../hooks/useFavorites';
 import { useAppSelector } from '../../app/store/hooks';
-import { Status } from '../../app/store/favorites/types';
+import { Status } from '../../app/@types/';
 import { selectUserIsAuth } from '../../app/store/user/selectors';
 
 import s from './BookCard.module.scss';
@@ -26,7 +26,7 @@ const BookCard = (props: Props) => {
     if (status === Status.LOADING) {
       return;
     }
-    !isLiked ? addToFavorites(card) : removeFromFavorites(card.id);
+    !isLiked ? addToFavorites(card.id) : removeFromFavorites(card.id);
   }
 
   return (

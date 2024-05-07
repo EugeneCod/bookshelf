@@ -18,9 +18,9 @@ export const selectFavoritesError = createSelector(
   },
 );
 
-export const selectFavoritesBooks = createSelector(
+export const selectFavoritesIds = createSelector(
   selectFavorites,
   (favorites) => {
-    return favorites.favoritesBooks;
+    return favorites.favoritesIds;
   },
 );

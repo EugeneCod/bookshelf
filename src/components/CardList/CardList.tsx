@@ -1,4 +1,4 @@
-import BookCard from '../BookCard/BookCard';
+import { BookCard } from '../';
 
 import s from './CardList.module.scss';
 

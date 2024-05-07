@@ -1,34 +1,28 @@
 import { createAppSlice } from '../createAppSlice';
 import {
-  addFavotitesBookToFS,
-  getFavotitesBooksFromFS,
-  removeFavotitesBookFromFS,
+  addFavotitesId,
+  getFavotitesIds,
+  removeFavotitesId,
 } from '../../../utils/favoritesApi';
 import { DATABASE_ERROR_MESSAGES } from '../../../utils/constants';
-
-import { Status } from './types';
+import { Status } from '../../@types';
 
 import type {
   AsyncThunkConfig,
+  FavoritesSliceState,
   GetFavoritesPayload,
   RemoveFavoritesPayload,
   SetFavoritesPayload,
 } from './types';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import type { LocalBookShortData } from '../books/types';
 
 const { ADD_ERROR, REMOVE_ERROR, GET_ERROR } =
   DATABASE_ERROR_MESSAGES.FAVORITES;
-export interface FavoritesSliceState {
-  status: Status;
-  error: undefined | string;
-  favoritesBooks: LocalBookShortData[];
-}
 
 const initialState: FavoritesSliceState = {
   status: Status.IDLE,
   error: undefined,
-  favoritesBooks: [],
+  favoritesIds: [],
 };
 
 const favoritesSlice = createAppSlice({
@@ -37,15 +31,15 @@ const favoritesSlice = createAppSlice({
   reducers: (create) => ({
     clearFaforites: create.reducer(() => initialState),
 
-    getFavoritesBooks: create.asyncThunk<
-      LocalBookShortData[],
+    getFavoritesIds: create.asyncThunk<
+      string[],
       GetFavoritesPayload,
       AsyncThunkConfig
     >(
       async ({ userId }, { rejectWithValue }) => {
         try {
-          const booksData = await getFavotitesBooksFromFS(userId);
-          return booksData;
+          const favoritesIds = await getFavotitesIds(userId);
+          return favoritesIds;
         } catch (error) {
           return rejectWithValue(GET_ERROR);
         }
@@ -56,7 +50,7 @@ const favoritesSlice = createAppSlice({
         },
         fulfilled: (state, action) => {
           state.status = Status.SUCCESS;
-          state.favoritesBooks = action.payload;
+          state.favoritesIds = action.payload;
         },
         rejected: (state, action) => {
           state.status = Status.FAILED;
@@ -65,15 +59,15 @@ const favoritesSlice = createAppSlice({
       },
     ),
 
-    addFavoritesBook: create.asyncThunk<
-      LocalBookShortData,
+    addFavoritesId: create.asyncThunk<
+      string,
       SetFavoritesPayload,
       AsyncThunkConfig
     >(
-      async ({ userId, bookData }, { rejectWithValue }) => {
+      async ({ userId, bookId }, { rejectWithValue }) => {
         try {
-          await addFavotitesBookToFS(userId, bookData);
-          return bookData;
+          await addFavotitesId(userId, bookId);
+          return bookId;
         } catch (error) {
           return rejectWithValue(ADD_ERROR);
         }
@@ -84,7 +78,7 @@ const favoritesSlice = createAppSlice({
         },
         fulfilled: (state, action) => {
           state.status = Status.SUCCESS;
-          state.favoritesBooks.push(action.payload);
+          state.favoritesIds.push(action.payload);
         },
         rejected: (state, action) => {
           state.status = Status.FAILED;
@@ -93,14 +87,14 @@ const favoritesSlice = createAppSlice({
       },
     ),
 
-    removeFavoritesBook: create.asyncThunk<
+    removeFavoritesId: create.asyncThunk<
       string,
       RemoveFavoritesPayload,
       AsyncThunkConfig
     >(
       async ({ userId, bookId }, { rejectWithValue }) => {
         try {
-          await removeFavotitesBookFromFS(userId, bookId);
+          await removeFavotitesId(userId, bookId);
           return bookId;
         } catch (error) {
           return rejectWithValue(REMOVE_ERROR);
@@ -113,10 +107,10 @@ const favoritesSlice = createAppSlice({
         fulfilled: (state, action: PayloadAction<string>) => {
           state.status = Status.SUCCESS;
           const removedBookId = action.payload;
-          const newFavoritesBooks = state.favoritesBooks.filter(
-            ({ id }) => removedBookId !== id,
+          const newFavoritesBooks = state.favoritesIds.filter(
+            (id) => removedBookId !== id,
           );
-          state.favoritesBooks = newFavoritesBooks;
+          state.favoritesIds = newFavoritesBooks;
         },
         rejected: (state, action) => {
           state.status = Status.FAILED;
@@ -128,9 +122,9 @@ const favoritesSlice = createAppSlice({
 });
 
 export const {
-  getFavoritesBooks,
-  addFavoritesBook,
-  removeFavoritesBook,
+  getFavoritesIds,
+  addFavoritesId,
+  removeFavoritesId,
   clearFaforites,
 } = favoritesSlice.actions;
 export default favoritesSlice.reducer;

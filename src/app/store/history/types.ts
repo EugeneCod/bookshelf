@@ -1,3 +1,5 @@
+import type { Status } from "../../@types";
+
 export interface HistorySliceState {
   status: Status;
   error: undefined | string;
@@ -28,10 +30,3 @@ export interface AddHistoryData extends GetHistoryData {
 export type AsyncThunkConfig = {
   rejectValue: string;
 };
-
-export enum Status {
-  IDLE = 'idle',
-  LOADING = 'loading',
-  SUCCESS = 'succeeded',
-  FAILED = 'failed',
-}
