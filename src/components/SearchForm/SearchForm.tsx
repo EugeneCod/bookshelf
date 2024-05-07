@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import Suggestions from '../Suggestions/Suggestions';
 import { useDebounce } from '../../hooks/useDebounce';
 import { useHistory } from '../../hooks/useHistory';
 import { ROUTES } from '../../utils/constants';
+import { useAppSelector } from '../../app/store/hooks';
+import { selectUserIsAuth } from '../../app/store/user/selectors';
 
 import s from './SearchForm.module.scss';
 
@@ -16,6 +18,11 @@ const SearchForm = () => {
   const navigate = useNavigate();
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
   const { addHistory } = useHistory();
+  const isAuth = useAppSelector(selectUserIsAuth);
+
+  useEffect(() => {
+    setSearchQuery(searchQueryFromParams)
+  }, [searchQueryFromParams])
 
   function handleChangeInput(evt: React.ChangeEvent<HTMLInputElement>) {
     setSearchQuery(evt.target.value);
@@ -35,8 +42,9 @@ const SearchForm = () => {
     searchBooks();
     setSuggestionsOpened(false);
 
-    const currentDate = new Date();
-    const dateTime = `${currentDate.toTimeString().slice(0, 8)},
+    if (isAuth) {
+      const currentDate = new Date();
+      const dateTime = `${currentDate.toTimeString().slice(0, 8)},
       ${currentDate.toLocaleDateString('en-US', {
         weekday: 'long',
         month: 'long',
@@ -44,7 +52,8 @@ const SearchForm = () => {
         year: 'numeric',
       })}`;
 
-    addHistory({ dateTime, searchQuery });
+      addHistory({ dateTime, searchQuery });
+    }
   }
 
   function searchBooks() {
