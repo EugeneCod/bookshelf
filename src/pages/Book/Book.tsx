@@ -4,6 +4,8 @@ import { useFavorites } from '../../hooks/useFavorites';
 import { LikeBtn, Preloader } from '../../components';
 import { useGetBookByIdQuery } from '../../app/store/books/booksApi';
 import { Status } from '../../app/store/favorites/types';
+import { useAppSelector } from '../../app/store/hooks';
+import { selectUserIsAuth } from '../../app/store/user/selectors';
 
 import s from './Book.module.scss';
 
@@ -13,6 +15,7 @@ const Book = () => {
     useFavorites();
   const { data: bookData, isLoading, isError } = useGetBookByIdQuery(id);
 
+  const isAuth = useAppSelector(selectUserIsAuth);
   const isLiked = checkIsLiked(id);
 
   function handleLikeClick() {
@@ -32,7 +35,9 @@ const Book = () => {
         {!!bookData && (
           <div className={s['card']}>
             <div className={s['card__image-container']}>
-              <LikeBtn isLiked={isLiked} onClick={handleLikeClick} />
+              {isAuth && (
+                <LikeBtn isLiked={isLiked} onClick={handleLikeClick} />
+              )}
               <img
                 className={s['card__image']}
                 src={bookData.imageLink}
@@ -67,7 +72,11 @@ const Book = () => {
           </div>
         )}
         {isLoading && <Preloader />}
-        {isError && <p className={s['page__error-message']}>An error occurred while uploading information about the book...</p>}
+        {isError && (
+          <p className={s['page__error-message']}>
+            An error occurred while uploading information about the book...
+          </p>
+        )}
       </div>
     </main>
   );
