@@ -22,9 +22,11 @@ const Book = () => {
     if (status === Status.LOADING || !bookData) {
       return;
     }
-    !isLiked
-      ? addToFavorites(bookData.id)
-      : removeFromFavorites(bookData.id);
+    if (!isLiked) {
+      addToFavorites(bookData.id)
+    } else {
+      removeFromFavorites(bookData.id)
+    }
   }
 
   return (
