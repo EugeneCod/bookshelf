@@ -27,9 +27,9 @@ const BookCard = (props: Props) => {
       return;
     }
     if (!isLiked) {
-      addToFavorites(card.id)
+      addToFavorites(card.id);
     } else {
-      removeFromFavorites(card.id)
+      removeFromFavorites(card.id);
     }
   }
 

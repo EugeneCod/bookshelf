@@ -18,14 +18,14 @@ const Book = () => {
   const isAuth = useAppSelector(selectUserIsAuth);
   const isLiked = checkIsLiked(id);
 
-  function handleLikeClick() {
+  function handleLikeClick(): void {
     if (status === Status.LOADING || !bookData) {
       return;
     }
     if (!isLiked) {
-      addToFavorites(bookData.id)
+      addToFavorites(bookData.id);
     } else {
-      removeFromFavorites(bookData.id)
+      removeFromFavorites(bookData.id);
     }
   }
 

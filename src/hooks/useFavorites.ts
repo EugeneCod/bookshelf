@@ -10,7 +10,16 @@ import {
   removeFavoritesId,
 } from '../app/store/favorites/slice';
 
-export const useFavorites = () => {
+import type { Status } from '../app/@types';
+
+export const useFavorites = (): {
+  favorites: string[];
+  status: Status;
+  error: string | undefined;
+  addToFavorites: (bookId: string) => void;
+  removeFromFavorites: (bookId: string) => void;
+  checkIsLiked: (bookId: string | undefined) => boolean;
+} => {
   const dispatch = useAppDispatch();
 
   const userId = useAppSelector(selectUserId);

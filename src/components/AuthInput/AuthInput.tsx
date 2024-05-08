@@ -1,5 +1,8 @@
 import classNames from 'classnames/bind';
 
+import { useAppSelector } from '../../app/store/hooks';
+import { selectUserIsLoading } from '../../app/store/user/selectors';
+
 import s from './AuthInput.module.scss';
 
 interface Props {
@@ -38,11 +41,14 @@ const AuthInput = (props: Props) => {
     'auth-input__input-line_invalid': !isValid,
   });
 
-  function handleChange(evt: React.ChangeEvent<HTMLInputElement>) {
+  const isLoading = useAppSelector(selectUserIsLoading);
+  //const isLoading =true;
+
+  function handleChange(evt: React.ChangeEvent<HTMLInputElement>): void {
     onChange(evt);
   }
 
-  function handleBlur(evt: React.FocusEvent<HTMLInputElement, Element>) {
+  function handleBlur(evt: React.FocusEvent<HTMLInputElement, Element>): void {
     onBlur(evt);
   }
 
@@ -62,8 +68,7 @@ const AuthInput = (props: Props) => {
         minLength={minLength}
         maxLength={maxLength}
         pattern={pattern}
-        // TODO Добавить глобальный стейт isLoading
-        // readOnly={isLoading}
+        readOnly={isLoading}
         className={inputClassNames}
       />
       <span className={s['auth-input__input-error']}>{error}</span>

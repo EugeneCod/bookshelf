@@ -22,7 +22,9 @@ const SearchCurrent = () => {
         {!!booksData && !!booksData.length ? (
           <CardList books={booksData} />
         ) : (
-          <p className={s['page__message']}>Nothing was found for your query...</p>
+          <p className={s['page__message']}>
+            Nothing was found for your query...
+          </p>
         )}
         {isLoading && <Preloader />}
       </div>

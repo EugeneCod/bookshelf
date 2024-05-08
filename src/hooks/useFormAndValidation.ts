@@ -18,7 +18,7 @@ const initialValidity = {
   name: true,
 };
 
-export default function useFormAndValidation(validity: boolean) {
+export function useFormAndValidation(validity: boolean) {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState(initialErrors);
   const [inputsValidity, setInputsValidity] = useState(initialValidity);
@@ -42,7 +42,11 @@ export default function useFormAndValidation(validity: boolean) {
   };
 
   const resetForm = useCallback(
-    (newValues = initialValues, newErrors = initialErrors, newIsValid = false) => {
+    (
+      newValues = initialValues,
+      newErrors = initialErrors,
+      newIsValid = false,
+    ) => {
       setValues(newValues);
       setErrors(newErrors);
       setIsValid(newIsValid);

@@ -18,7 +18,7 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  async function handleLogoutClick() {
+  async function handleLogoutClick(): Promise<void> {
     logout()
       .then(() => {
         dispatch(removeUser());
@@ -27,10 +27,10 @@ const Header = () => {
         throw new Error(err);
       });
   }
-  function handleLoginClick() {
+  function handleLoginClick(): void {
     navigate(ROUTES.SIGNIN);
   }
-  function handleSignupClick() {
+  function handleSignupClick(): void {
     navigate(ROUTES.SIGNUP);
   }
 

@@ -3,10 +3,10 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from '../../app/store/hooks';
 import { ROUTES, REGEX } from '../../utils/constants';
-import useFormAndValidation from '../../hooks/useFormAndValidation';
+import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import { AuthForm, AuthInput } from '../../components';
 import { login } from '../../utils/authApi';
-import { setUser } from '../../app/store/user/slice';
+import { setUser, setUserIsLoading } from '../../app/store/user/slice';
 
 import s from './Login.module.scss';
 
@@ -26,17 +26,22 @@ const Login = () => {
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
   const [submitBtnText, setSubmitBtnText] = useState('Login');
 
-  async function handleLogin() {
+  async function handleLogin(): Promise<void> {
+    dispatch(setUserIsLoading(true));
     setSubmitBtnText('Processing...');
     login(values.email, values.password)
-    .then((userData) => {
-      dispatch(setUser(userData));
-      navigate(ROUTES.MAIN);
-    })
-    .catch((err) => {
-      setLoginErrorMessage(err);
-      setSubmitBtnText('Login');
-    })
+      .then((userData) => {
+        dispatch(setUser(userData));
+        navigate(ROUTES.MAIN);
+      })
+      .catch((err) => {
+        setLoginErrorMessage(err);
+        setSubmitBtnText('Login');
+      })
+      .finally(() => {
+        dispatch(setUserIsLoading(false));
+        setSubmitBtnText('Login');
+      });
   }
 
   return (

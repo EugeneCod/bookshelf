@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import { ROUTES, REGEX } from '../../utils/constants';
-import useFormAndValidation from '../../hooks/useFormAndValidation';
+import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import { AuthForm, AuthInput } from '../../components';
 import { register } from '../../utils/authApi';
+import { useAppDispatch } from '../../app/store/hooks';
+import { setUserIsLoading } from '../../app/store/user/slice';
 
 import s from './Signup.module.scss';
 
@@ -18,12 +20,14 @@ const Signup = () => {
     isValid,
   } = useFormAndValidation(false);
 
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const [signupErrorMessage, setSignupErrorMessage] = useState('');
   const [submitBtnText, setSubmitBtnText] = useState('Register');
 
-  async function handleSignup() {
+  async function handleSignup(): Promise<void> {
+    dispatch(setUserIsLoading(true));
     setSubmitBtnText('Processing...');
     register(values.email, values.password)
       .then(() => {
@@ -31,6 +35,10 @@ const Signup = () => {
       })
       .catch((err) => {
         setSignupErrorMessage(err);
+        setSubmitBtnText('Register');
+      })
+      .finally(() => {
+        dispatch(setUserIsLoading(false));
         setSubmitBtnText('Register');
       });
   }

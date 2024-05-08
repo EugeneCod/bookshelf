@@ -3,8 +3,9 @@ import { get, push, ref, remove } from 'firebase/database';
 import { db } from '../firebase';
 
 import type { HistoryData, PriorHistoryData } from '../app/store/history/types';
+import type { DatabaseReference } from 'firebase/database';
 
-function getHistotyRef(userId: string, historyId?: string) {
+function getHistotyRef(userId: string, historyId?: string): DatabaseReference {
   return arguments.length === 1
     ? ref(db, `users/${userId}/history`)
     : ref(db, `users/${userId}/history/${historyId}`);
@@ -13,7 +14,7 @@ function getHistotyRef(userId: string, historyId?: string) {
 export const requestAdditionRecord = async (
   userId: string,
   historyData: PriorHistoryData,
-) => {
+): Promise<HistoryData> => {
   try {
     const historyRef = getHistotyRef(userId);
     const addedHistoryData = await push(historyRef, historyData);
@@ -27,7 +28,7 @@ export const requestAdditionRecord = async (
 export const requestToDeleteRecord = async (
   userId: string,
   historyId: string,
-) => {
+): Promise<string> => {
   try {
     const historyByIdRef = getHistotyRef(userId, historyId);
     await remove(historyByIdRef);
@@ -37,7 +38,9 @@ export const requestToDeleteRecord = async (
   }
 };
 
-export const requestToClearRecords = async (userId: string) => {
+export const requestToClearRecords = async (
+  userId: string,
+): Promise<string> => {
   try {
     const historyRef = getHistotyRef(userId);
     await remove(historyRef);
@@ -47,7 +50,9 @@ export const requestToClearRecords = async (userId: string) => {
   }
 };
 
-export const requestRecords = async (userId: string) => {
+export const requestRecords = async (
+  userId: string,
+): Promise<HistoryData[]> => {
   try {
     const historyRef = getHistotyRef(userId);
     const snapshot = await get(historyRef);
@@ -64,7 +69,6 @@ export const requestRecords = async (userId: string) => {
       return historyData;
     }
     return [];
-
   } catch (error) {
     return Promise.reject(error);
   }

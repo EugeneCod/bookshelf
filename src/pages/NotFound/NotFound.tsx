@@ -6,7 +6,7 @@ const NotFound = () => {
       <h1 className={s['errorCode']}>404</h1>
       <p className={s['errorDescription']}>Page not found</p>
     </div>
-  )
-}
+  );
+};
 
-export default NotFound
+export default NotFound;

@@ -3,9 +3,13 @@ import stubImage from '../assets/img/stub-image.png';
 import type {
   ApiBooksFullItem,
   ApiBooksLiteData,
+  LocalBookFullData,
+  LocalBookShortData,
 } from '../app/store/books/types';
 
-export function transformResBooks({ items }: ApiBooksLiteData) {
+export function transformResBooks({
+  items,
+}: ApiBooksLiteData): LocalBookShortData[] {
   return items
     ? items.map((item) => ({
         id: item.id,
@@ -17,7 +21,7 @@ export function transformResBooks({ items }: ApiBooksLiteData) {
     : [];
 }
 
-export function transformResBook(item: ApiBooksFullItem) {
+export function transformResBook(item: ApiBooksFullItem): LocalBookFullData {
   return {
     id: item.id,
     title: item.volumeInfo.title,

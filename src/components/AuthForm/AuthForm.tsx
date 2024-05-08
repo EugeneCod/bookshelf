@@ -39,12 +39,12 @@ const AuthForm = (props: Props) => {
 
   const buttonClassNames = cx({
     'auth-form__button': true,
-    'auth-form__button_inactive': !isValid || isLoading
+    'auth-form__button_inactive': !isValid || isLoading,
   });
 
-  function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(evt: React.FormEvent<HTMLFormElement>): void {
     evt.preventDefault();
-    onSubmit()
+    onSubmit();
   }
 
   return (
