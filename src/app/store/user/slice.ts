@@ -21,8 +21,11 @@ const userSlice = createSlice({
       state.email = null;
       state.id = null;
     },
+    setUserIsLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
+    },
   },
 });
 
-export const { setUser, removeUser } = userSlice.actions;
+export const { setUser, removeUser, setUserIsLoading } = userSlice.actions;
 export default userSlice.reducer;

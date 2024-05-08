@@ -6,7 +6,7 @@ import { ROUTES, REGEX } from '../../utils/constants';
 import useFormAndValidation from '../../hooks/useFormAndValidation';
 import { AuthForm, AuthInput } from '../../components';
 import { login } from '../../utils/authApi';
-import { setUser } from '../../app/store/user/slice';
+import { setUser, setUserIsLoading } from '../../app/store/user/slice';
 
 import s from './Login.module.scss';
 
@@ -27,6 +27,7 @@ const Login = () => {
   const [submitBtnText, setSubmitBtnText] = useState('Login');
 
   async function handleLogin(): Promise<void> {
+    dispatch(setUserIsLoading(true));
     setSubmitBtnText('Processing...');
     login(values.email, values.password)
       .then((userData) => {
@@ -35,6 +36,10 @@ const Login = () => {
       })
       .catch((err) => {
         setLoginErrorMessage(err);
+        setSubmitBtnText('Login');
+      })
+      .finally(() => {
+        dispatch(setUserIsLoading(false));
         setSubmitBtnText('Login');
       });
   }
