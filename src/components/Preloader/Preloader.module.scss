@@ -64,7 +64,8 @@
     left: 0;
     background: $font-main;
     border-radius: 50px;
-    &::after, &::before {
+    &::after,
+    &::before {
       content: '';
       width: 100px;
       height: 100px;

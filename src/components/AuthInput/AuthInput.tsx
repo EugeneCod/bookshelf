@@ -41,7 +41,7 @@ const AuthInput = (props: Props) => {
     'auth-input__input-line_invalid': !isValid,
   });
 
-   const isLoading = useAppSelector(selectUserIsLoading);
+  const isLoading = useAppSelector(selectUserIsLoading);
   //const isLoading =true;
 
   function handleChange(evt: React.ChangeEvent<HTMLInputElement>): void {

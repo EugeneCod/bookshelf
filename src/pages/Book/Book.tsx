@@ -23,9 +23,9 @@ const Book = () => {
       return;
     }
     if (!isLiked) {
-      addToFavorites(bookData.id)
+      addToFavorites(bookData.id);
     } else {
-      removeFromFavorites(bookData.id)
+      removeFromFavorites(bookData.id);
     }
   }
 
