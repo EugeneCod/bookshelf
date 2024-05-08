@@ -28,15 +28,14 @@ const Login = () => {
 
   async function handleLogin(): Promise<void> {
     dispatch(setUserIsLoading(true));
+    setLoginErrorMessage('')
     setSubmitBtnText('Processing...');
     login(values.email, values.password)
-      .then((userData) => {
-        dispatch(setUser(userData));
+      .then(() => {
         navigate(ROUTES.MAIN);
       })
       .catch((err) => {
         setLoginErrorMessage(err);
-        setSubmitBtnText('Login');
       })
       .finally(() => {
         dispatch(setUserIsLoading(false));

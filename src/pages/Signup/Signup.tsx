@@ -28,14 +28,14 @@ const Signup = () => {
 
   async function handleSignup(): Promise<void> {
     dispatch(setUserIsLoading(true));
+    setSignupErrorMessage('');
     setSubmitBtnText('Processing...');
     register(values.email, values.password)
       .then(() => {
-        navigate(ROUTES.SIGNIN);
+        navigate(ROUTES.MAIN);
       })
       .catch((err) => {
         setSignupErrorMessage(err);
-        setSubmitBtnText('Register');
       })
       .finally(() => {
         dispatch(setUserIsLoading(false));
