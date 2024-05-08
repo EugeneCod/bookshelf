@@ -1,8 +1,8 @@
 import { createAppSlice } from '../createAppSlice';
 import {
-  addFavotitesId,
-  getFavotitesIds,
-  removeFavotitesId,
+  requestAdditionId,
+  requestIds,
+  requestDeletionId,
 } from '../../../utils/favoritesApi';
 import { DATABASE_ERROR_MESSAGES } from '../../../utils/constants';
 import { Status } from '../../@types';
@@ -38,7 +38,7 @@ const favoritesSlice = createAppSlice({
     >(
       async ({ userId }, { rejectWithValue }) => {
         try {
-          const favoritesIds = await getFavotitesIds(userId);
+          const favoritesIds = await requestIds(userId);
           return favoritesIds;
         } catch (error) {
           return rejectWithValue(GET_ERROR);
@@ -66,7 +66,7 @@ const favoritesSlice = createAppSlice({
     >(
       async ({ userId, bookId }, { rejectWithValue }) => {
         try {
-          await addFavotitesId(userId, bookId);
+          await requestAdditionId(userId, bookId);
           return bookId;
         } catch (error) {
           return rejectWithValue(ADD_ERROR);
@@ -94,7 +94,7 @@ const favoritesSlice = createAppSlice({
     >(
       async ({ userId, bookId }, { rejectWithValue }) => {
         try {
-          await removeFavotitesId(userId, bookId);
+          await requestDeletionId(userId, bookId);
           return bookId;
         } catch (error) {
           return rejectWithValue(REMOVE_ERROR);

@@ -8,7 +8,7 @@ function getBooksRef(userId: string, bookId?: string) {
     : ref(db, `users/${userId}/books/${bookId}`);
 }
 
-export const addFavotitesId = async (
+export const requestAdditionId = async (
   userId: string,
   bookId: string,
 ) => {
@@ -21,7 +21,7 @@ export const addFavotitesId = async (
   }
 };
 
-export const removeFavotitesId = async (
+export const requestDeletionId = async (
   userId: string,
   bookId: string,
 ) => {
@@ -34,7 +34,7 @@ export const removeFavotitesId = async (
   }
 };
 
-export const getFavotitesIds = async (userId: string) => {
+export const requestIds = async (userId: string) => {
   try {
     const booksRef = getBooksRef(userId);
     const snapshot = await get(booksRef);

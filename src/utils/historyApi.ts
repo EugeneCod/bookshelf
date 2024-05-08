@@ -10,7 +10,7 @@ function getHistotyRef(userId: string, historyId?: string) {
     : ref(db, `users/${userId}/history/${historyId}`);
 }
 
-export const addUserHistoryToFS = async (
+export const requestAdditionRecord = async (
   userId: string,
   historyData: PriorHistoryData,
 ) => {
@@ -24,7 +24,7 @@ export const addUserHistoryToFS = async (
   }
 };
 
-export const removeUserHistoryFromFS = async (
+export const requestToDeleteRecord = async (
   userId: string,
   historyId: string,
 ) => {
@@ -37,7 +37,7 @@ export const removeUserHistoryFromFS = async (
   }
 };
 
-export const removeAllUserHistoryFromFS = async (userId: string) => {
+export const requestToClearRecords = async (userId: string) => {
   try {
     const historyRef = getHistotyRef(userId);
     await remove(historyRef);
@@ -47,7 +47,7 @@ export const removeAllUserHistoryFromFS = async (userId: string) => {
   }
 };
 
-export const getUserHistoryFromFS = async (userId: string) => {
+export const requestRecords = async (userId: string) => {
   try {
     const historyRef = getHistotyRef(userId);
     const snapshot = await get(historyRef);
