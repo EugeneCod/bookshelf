@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 import { useAppDispatch } from '../../app/store/hooks';
 import { ROUTES, REGEX } from '../../utils/constants';
-import useFormAndValidation from '../../hooks/useFormAndValidation';
+import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import { AuthForm, AuthInput } from '../../components';
 import { login } from '../../utils/authApi';
 import { setUser, setUserIsLoading } from '../../app/store/user/slice';
