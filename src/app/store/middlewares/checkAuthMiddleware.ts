@@ -1,5 +1,6 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit';
 
+import { clearFaforites, getFavoritesIds } from '../favorites/slice';
 import { clearHistory, getUserHistory } from '../history/slice';
 import { removeUser, setUser } from '../user/slice';
 
@@ -9,7 +10,7 @@ import type { AppDispatch, RootState } from '../store';
 export const checkAuthMiddleware = createListenerMiddleware();
 
 const startTypedListening =
-checkAuthMiddleware.startListening as TypedStartListening<
+  checkAuthMiddleware.startListening as TypedStartListening<
     RootState,
     AppDispatch
   >;
@@ -18,6 +19,7 @@ startTypedListening({
   actionCreator: setUser,
   effect: (action, { dispatch }) => {
     dispatch(getUserHistory({ userId: action.payload.id }));
+    dispatch(getFavoritesIds({ userId: action.payload.id }));
   },
 });
 
@@ -25,5 +27,6 @@ startTypedListening({
   actionCreator: removeUser,
   effect: (_, { dispatch }) => {
     dispatch(clearHistory());
+    dispatch(clearFaforites());
   },
 });

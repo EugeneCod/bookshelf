@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
 import userReducer from './user/slice';
 import historyReducer from './history/slice';
+import favoritesReducer from './favorites/slice';
 import { booksApi } from './books/booksApi';
 import { checkAuthMiddleware } from './middlewares/checkAuthMiddleware';
 
@@ -10,6 +11,7 @@ import type { Action, ThunkAction } from '@reduxjs/toolkit';
 const rootReducer = combineReducers({
   user: userReducer,
   history: historyReducer,
+  favorites: favoritesReducer,
   [booksApi.reducerPath]: booksApi.reducer,
 });
 

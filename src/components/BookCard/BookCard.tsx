@@ -1,8 +1,11 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { ROUTES } from '../../utils/constants';
-import LikeBtn from '../LikeBtn/LikeBtn';
+import { LikeBtn } from '../';
+import { useFavorites } from '../../hooks/useFavorites';
+import { useAppSelector } from '../../app/store/hooks';
+import { Status } from '../../app/@types/';
+import { selectUserIsAuth } from '../../app/store/user/selectors';
 
 import s from './BookCard.module.scss';
 
@@ -14,13 +17,20 @@ interface Props {
 
 const BookCard = (props: Props) => {
   const { card } = props;
-  // TODO синхронизировать состояние лайка с хранилищем
-  // const isLiked = useAppSelector((state) => state.favorites.some(item.id === props.card.id))
-  const [isLiked, setIsLiked] = useState(false);
-
+  const isAuth = useAppSelector(selectUserIsAuth);
+  const { status, addToFavorites, removeFromFavorites, checkIsLiked } =
+    useFavorites();
+  const isLiked = checkIsLiked(card.id);
 
   function handleLikeClick() {
-    setIsLiked((pending) => !pending);
+    if (status === Status.LOADING) {
+      return;
+    }
+    if (!isLiked) {
+      addToFavorites(card.id)
+    } else {
+      removeFromFavorites(card.id)
+    }
   }
 
   return (
@@ -34,11 +44,13 @@ const BookCard = (props: Props) => {
         <p className={s['card__title']}>{card.title}</p>
         <p className={s['card__author']}>{card.authors}</p>
       </div>
-      <LikeBtn
-        className={s['card__button-like']}
-        isLiked={isLiked}
-        onClick={handleLikeClick}
-      />
+      {isAuth && (
+        <LikeBtn
+          className={s['card__button-like']}
+          isLiked={isLiked}
+          onClick={handleLikeClick}
+        />
+      )}
     </li>
   );
 };

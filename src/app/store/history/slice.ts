@@ -1,13 +1,12 @@
 import {
-  addUserHistoryToFS,
-  getUserHistoryFromFS,
-  removeAllUserHistoryFromFS,
-  removeUserHistoryFromFS,
+  requestAdditionRecord,
+  requestRecords,
+  requestToClearRecords,
+  requestToDeleteRecord,
 } from '../../../utils/historyApi';
 import { createAppSlice } from '../createAppSlice';
 import { DATABASE_ERROR_MESSAGES } from '../../../utils/constants';
-
-import { Status } from './types';
+import { Status } from '../../@types/';
 
 import type {
   AddHistoryData,
@@ -39,7 +38,7 @@ const historySlice = createAppSlice({
     >(
       async ({ userId }, { rejectWithValue }) => {
         try {
-          const historyDataArr = await getUserHistoryFromFS(userId);
+          const historyDataArr = await requestRecords(userId);
           return historyDataArr;
         } catch (error) {
           return rejectWithValue(GET_ERROR);
@@ -66,10 +65,7 @@ const historySlice = createAppSlice({
     >(
       async ({ userId, priorHistoryData }, { rejectWithValue }) => {
         try {
-          const historyData = await addUserHistoryToFS(
-            userId,
-            priorHistoryData,
-          );
+          const historyData = await requestAdditionRecord(userId, priorHistoryData);
           return historyData;
         } catch (error) {
           return rejectWithValue(ADD_ERROR);
@@ -96,10 +92,7 @@ const historySlice = createAppSlice({
     >(
       async ({ userId, historyId }, { rejectWithValue }) => {
         try {
-          const removedHistoryId = await removeUserHistoryFromFS(
-            userId,
-            historyId,
-          );
+          const removedHistoryId = await requestToDeleteRecord(userId, historyId);
           return removedHistoryId;
         } catch (error) {
           return rejectWithValue(REMOVE_ERROR);
@@ -130,7 +123,7 @@ const historySlice = createAppSlice({
     >(
       async ({ userId }, { rejectWithValue, dispatch }) => {
         try {
-          await removeAllUserHistoryFromFS(userId);
+          await requestToClearRecords(userId);
           dispatch(clearHistory());
         } catch (error) {
           return rejectWithValue(REMOVE_ERROR);
