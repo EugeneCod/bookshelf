@@ -5,7 +5,9 @@ import { useAppDispatch } from '../app/store/hooks';
 import { removeUser, setUser } from '../app/store/user/slice';
 import { auth } from '../firebase';
 
-const useFirebaseAuth = () => {
+const useFirebaseAuth = (): {
+  isCheckAuth: boolean;
+} => {
   const [isCheckAuth, setIsCheckAuth] = useState(true);
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -13,10 +15,10 @@ const useFirebaseAuth = () => {
       if (user) {
         const { email, uid } = user;
         dispatch(setUser({ email, id: uid }));
-        setIsCheckAuth(false)
+        setIsCheckAuth(false);
       } else {
         dispatch(removeUser());
-        setIsCheckAuth(false)
+        setIsCheckAuth(false);
       }
     });
     return () => {

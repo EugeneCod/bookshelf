@@ -44,7 +44,9 @@ const ThemeProvider = (props: Props) => {
   }
 
   return (
-    <ThemeContext.Provider value={{ isDarkMode, onToggleTheme: handleToggleTheme }}>
+    <ThemeContext.Provider
+      value={{ isDarkMode, onToggleTheme: handleToggleTheme }}
+    >
       {children}
     </ThemeContext.Provider>
   );

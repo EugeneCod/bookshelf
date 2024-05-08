@@ -14,8 +14,8 @@ const LikeBtn = (props: Props) => {
   const cx = classNames.bind(s);
 
   const cardLikeButtonClassName = cx({
-    'button': true,
-    'button_active': isLiked,
+    button: true,
+    button_active: isLiked,
     className,
   });
   return (

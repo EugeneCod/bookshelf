@@ -65,7 +65,10 @@ const historySlice = createAppSlice({
     >(
       async ({ userId, priorHistoryData }, { rejectWithValue }) => {
         try {
-          const historyData = await requestAdditionRecord(userId, priorHistoryData);
+          const historyData = await requestAdditionRecord(
+            userId,
+            priorHistoryData,
+          );
           return historyData;
         } catch (error) {
           return rejectWithValue(ADD_ERROR);
@@ -92,7 +95,10 @@ const historySlice = createAppSlice({
     >(
       async ({ userId, historyId }, { rejectWithValue }) => {
         try {
-          const removedHistoryId = await requestToDeleteRecord(userId, historyId);
+          const removedHistoryId = await requestToDeleteRecord(
+            userId,
+            historyId,
+          );
           return removedHistoryId;
         } catch (error) {
           return rejectWithValue(REMOVE_ERROR);

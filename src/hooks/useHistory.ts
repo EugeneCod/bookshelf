@@ -11,9 +11,17 @@ import {
   removeUserHistory,
 } from '../app/store/history/slice';
 
-import type { PriorHistoryData } from '../app/store/history/types';
+import type { HistoryData, PriorHistoryData } from '../app/store/history/types';
+import type { Status } from '../app/@types';
 
-export const useHistory = () => {
+export const useHistory = (): {
+  history: HistoryData[];
+  status: Status;
+  error: string | undefined;
+  addHistory: (priorHistoryData: PriorHistoryData) => void;
+  removeHistory: (historyId: string) => void;
+  clearHistory: () => void;
+} => {
   const dispatch = useAppDispatch();
 
   const userId = useAppSelector(selectUserId);

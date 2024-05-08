@@ -18,7 +18,7 @@ const Book = () => {
   const isAuth = useAppSelector(selectUserIsAuth);
   const isLiked = checkIsLiked(id);
 
-  function handleLikeClick() {
+  function handleLikeClick(): void {
     if (status === Status.LOADING || !bookData) {
       return;
     }

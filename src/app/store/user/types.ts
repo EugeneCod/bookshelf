@@ -7,10 +7,9 @@ export interface UserSliceState {
 export interface AuthData {
   email: string;
   password: string;
-};
+}
 
 export type SetUserPayload = {
   email: string | null;
   id: string;
 };
-

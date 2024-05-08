@@ -23,7 +23,7 @@ const Signup = () => {
   const [signupErrorMessage, setSignupErrorMessage] = useState('');
   const [submitBtnText, setSubmitBtnText] = useState('Register');
 
-  async function handleSignup() {
+  async function handleSignup(): Promise<void> {
     setSubmitBtnText('Processing...');
     register(values.email, values.password)
       .then(() => {

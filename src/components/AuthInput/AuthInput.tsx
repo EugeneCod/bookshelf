@@ -38,11 +38,11 @@ const AuthInput = (props: Props) => {
     'auth-input__input-line_invalid': !isValid,
   });
 
-  function handleChange(evt: React.ChangeEvent<HTMLInputElement>) {
+  function handleChange(evt: React.ChangeEvent<HTMLInputElement>): void {
     onChange(evt);
   }
 
-  function handleBlur(evt: React.FocusEvent<HTMLInputElement, Element>) {
+  function handleBlur(evt: React.FocusEvent<HTMLInputElement, Element>): void {
     onBlur(evt);
   }
 

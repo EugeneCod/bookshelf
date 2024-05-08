@@ -26,17 +26,17 @@ const Login = () => {
   const [loginErrorMessage, setLoginErrorMessage] = useState('');
   const [submitBtnText, setSubmitBtnText] = useState('Login');
 
-  async function handleLogin() {
+  async function handleLogin(): Promise<void> {
     setSubmitBtnText('Processing...');
     login(values.email, values.password)
-    .then((userData) => {
-      dispatch(setUser(userData));
-      navigate(ROUTES.MAIN);
-    })
-    .catch((err) => {
-      setLoginErrorMessage(err);
-      setSubmitBtnText('Login');
-    })
+      .then((userData) => {
+        dispatch(setUser(userData));
+        navigate(ROUTES.MAIN);
+      })
+      .catch((err) => {
+        setLoginErrorMessage(err);
+        setSubmitBtnText('Login');
+      });
   }
 
   return (

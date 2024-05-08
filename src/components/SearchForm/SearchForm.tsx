@@ -21,8 +21,8 @@ const SearchForm = () => {
   const isAuth = useAppSelector(selectUserIsAuth);
 
   useEffect(() => {
-    setSearchQuery(searchQueryFromParams)
-  }, [searchQueryFromParams])
+    setSearchQuery(searchQueryFromParams);
+  }, [searchQueryFromParams]);
 
   function handleChangeInput(evt: React.ChangeEvent<HTMLInputElement>) {
     setSearchQuery(evt.target.value);
@@ -56,7 +56,7 @@ const SearchForm = () => {
     }
   }
 
-  function searchBooks() {
+  function searchBooks(): void {
     const encodeSearchQuery = encodeURIComponent(searchQuery);
     navigate(`${ROUTES.SEARCH}?q=${encodeSearchQuery}`);
   }
