@@ -14,7 +14,7 @@ const BookCardFavorites = (props: Props) => {
     const { id, title, authors, imageLink } = booksData;
     return <BookCard card={{ id, title, authors, imageLink }} />;
   } else {
-    return <></>;
+    return null;
   }
 };
 

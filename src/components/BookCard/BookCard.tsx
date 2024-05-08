@@ -26,7 +26,11 @@ const BookCard = (props: Props) => {
     if (status === Status.LOADING) {
       return;
     }
-    !isLiked ? addToFavorites(card.id) : removeFromFavorites(card.id);
+    if (!isLiked) {
+      addToFavorites(card.id)
+    } else {
+      removeFromFavorites(card.id)
+    }
   }
 
   return (
