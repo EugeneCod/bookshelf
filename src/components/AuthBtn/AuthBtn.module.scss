@@ -13,4 +13,8 @@
   font-size: 14px;
   line-height: 16px;
   @extend %hover-active-opacity;
+  @media (max-width: 768px) {
+    font-size: 12px;
+    padding: 10px;
+  }
 }

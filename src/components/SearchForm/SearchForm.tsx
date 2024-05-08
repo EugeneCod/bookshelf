@@ -46,7 +46,6 @@ const SearchForm = () => {
       const currentDate = new Date();
       const dateTime = `${currentDate.toTimeString().slice(0, 8)},
       ${currentDate.toLocaleDateString('en-US', {
-        weekday: 'long',
         month: 'long',
         day: 'numeric',
         year: 'numeric',

@@ -6,7 +6,7 @@ import { ROUTES, REGEX } from '../../utils/constants';
 import { useFormAndValidation } from '../../hooks/useFormAndValidation';
 import { AuthForm, AuthInput } from '../../components';
 import { login } from '../../utils/authApi';
-import { setUser, setUserIsLoading } from '../../app/store/user/slice';
+import { setUserIsLoading } from '../../app/store/user/slice';
 
 import s from './Login.module.scss';
 

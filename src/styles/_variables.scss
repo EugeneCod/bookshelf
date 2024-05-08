@@ -53,9 +53,11 @@ $logo-font-family: 'Fyodor', Arial, Helvetica, sans-serif;
 %side-container-padding {
   padding-left: 30px;
   padding-right: 30px;
+  padding-bottom: 30px;
 
   @media (max-width: 768px) {
     padding-left: 10px;
     padding-right: 10px;
+    padding-bottom: 10px;
   }
 }
