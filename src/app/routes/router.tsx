@@ -31,14 +31,6 @@ export const router = createBrowserRouter(
           element: <Home />,
         },
         {
-          path: ROUTES.SIGNIN,
-          element: <Login />,
-        },
-        {
-          path: ROUTES.SIGNUP,
-          element: <Signup />,
-        },
-        {
           path: `${ROUTES.SEARCH}`,
           element: <SearchCurrent />,
         },
@@ -47,9 +39,25 @@ export const router = createBrowserRouter(
           element: <Book />,
         },
         {
-          path: ROUTES.FAVORITES,
+          path: ROUTES.SIGNIN,
           element: (
             <ProtectedRoute>
+              <Login />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: ROUTES.SIGNUP,
+          element: (
+            <ProtectedRoute>
+              <Signup />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: ROUTES.FAVORITES,
+          element: (
+            <ProtectedRoute unauthorizedProtection>
               <Favorites />
             </ProtectedRoute>
           ),
@@ -57,7 +65,7 @@ export const router = createBrowserRouter(
         {
           path: ROUTES.HISTORY,
           element: (
-            <ProtectedRoute>
+            <ProtectedRoute unauthorizedProtection>
               <SearchHistory />
             </ProtectedRoute>
           ),
