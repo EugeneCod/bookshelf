@@ -39,9 +39,11 @@ const SearchForm = () => {
 
   function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
-    searchBooks();
     setSuggestionsOpened(false);
-
+    if (searchQueryFromParams === searchQuery) {
+      return;
+    }
+    searchBooks();
     if (isAuth) {
       const currentDate = new Date();
       const dateTime = `${currentDate.toTimeString().slice(0, 8)},
