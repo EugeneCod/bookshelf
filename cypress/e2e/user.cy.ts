@@ -28,7 +28,7 @@ describe('User testing', () => {
 
     // Ввести в поисковую строку слово 'азбука'
     cy.get('[data-testid="search-input"]').type('азбука');
-    
+
     // В выпадающем меню перейти по первой ссылке и проверить
     // что мы по адресу '/book/:bookId'
     cy.get('[data-testid="suggestions"]').should('be.visible');
