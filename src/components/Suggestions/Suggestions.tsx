@@ -26,7 +26,7 @@ const Suggestions = (props: Props) => {
 
   return (
     <div className={s['menu']}>
-      {!!booksData && !!booksData.length ? (
+      {!!booksData && booksData.length !== 0 && (
         <>
           <p className={s['menu__title']}>Perhaps you were looking for</p>
           <ul className={s['menu__list']}>
@@ -49,7 +49,8 @@ const Suggestions = (props: Props) => {
             })}
           </ul>
         </>
-      ) : (
+      )}
+      {booksData?.length === 0 && (
         <p className={s['menu__message']}>Nothing was found for your query</p>
       )}
       {isLoading && <p className={s['menu__preloader']}>Searching...</p>}
