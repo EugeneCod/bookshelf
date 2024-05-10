@@ -25,7 +25,7 @@ const Suggestions = (props: Props) => {
   );
 
   return (
-    <div className={s['menu']}>
+    <div data-testid="suggestions" className={s['menu']}>
       {!!booksData && !!booksData.length ? (
         <>
           <p className={s['menu__title']}>Perhaps you were looking for</p>
@@ -36,6 +36,7 @@ const Suggestions = (props: Props) => {
                   to={`${ROUTES.BOOK}/${book.id}`}
                   className={s['menu-card']}
                   key={book.id}
+                  data-testid={`${book.id}`}
                 >
                   <img
                     className={s['menu-card__image']}
