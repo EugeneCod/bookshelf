@@ -1,9 +1,11 @@
+import { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import { ROUTES } from '../../utils/constants';
 
 import s from './HistoryItem.module.scss';
+
 
 interface Props {
   searchQuery: string;
@@ -34,7 +36,7 @@ const HistoryItem = (props: Props) => {
   );
 };
 
-export default HistoryItem;
+export default memo(HistoryItem) ;
 
 HistoryItem.propTypes = {
   searchQuery: PropTypes.string.isRequired,

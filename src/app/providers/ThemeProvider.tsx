@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import { ThemeContext, themes } from '../contexts/ThemeContext';
 
@@ -24,9 +24,9 @@ const ThemeProvider = (props: Props) => {
   const { children } = props;
   const [theme, setTheme] = useState(getTheme);
 
-  function handleToggleTheme() {
+  const handleToggleTheme = useCallback(() => {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
-  }
+  }, []);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -43,10 +43,12 @@ const ThemeProvider = (props: Props) => {
       break;
   }
 
+  const cachedValue = useMemo(() => {
+    return { isDarkMode, onToggleTheme: handleToggleTheme };
+  }, [isDarkMode, handleToggleTheme]);
+
   return (
-    <ThemeContext.Provider
-      value={{ isDarkMode, onToggleTheme: handleToggleTheme }}
-    >
+    <ThemeContext.Provider value={cachedValue}>
       {children}
     </ThemeContext.Provider>
   );
