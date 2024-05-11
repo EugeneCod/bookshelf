@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import {
   selectHistoryDataArr,
   selectHistoryError,
@@ -13,6 +15,7 @@ import {
 
 import type { HistoryData, PriorHistoryData } from '../app/store/history/types';
 import type { Status } from '../app/@types';
+
 
 export const useHistory = (): {
   history: HistoryData[];
@@ -33,9 +36,9 @@ export const useHistory = (): {
     userId && dispatch(addUserHistory({ userId, priorHistoryData }));
   }
 
-  function removeHistory(historyId: string) {
-    userId && dispatch(removeUserHistory({ userId, historyId }));
-  }
+  const removeHistory = useCallback((historyId: string) => {
+    userId && dispatch(removeUserHistory({ userId, historyId }))
+  }, [dispatch, userId])
 
   function clearHistory() {
     userId && dispatch(removeAllUserHistory({ userId }));
