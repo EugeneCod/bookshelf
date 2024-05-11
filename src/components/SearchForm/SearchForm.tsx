@@ -30,7 +30,6 @@ const SearchForm = () => {
 
   function handleChangeInput(evt: React.ChangeEvent<HTMLInputElement>) {
     setSearchQuery(evt.target.value);
-    // setSuggestionsOpened(true);
   }
 
   function handleBlurInput() {
