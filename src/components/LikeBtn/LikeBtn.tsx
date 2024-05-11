@@ -21,7 +21,7 @@ const LikeBtn = (props: Props) => {
   return (
     <button
       data-testid="like-btn"
-      data-testLiked={isLiked}
+      data-testliked={isLiked}
       type="button"
       className={cardLikeButtonClassName}
       onClick={onClick}

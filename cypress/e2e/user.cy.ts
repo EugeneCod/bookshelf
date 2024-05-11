@@ -48,7 +48,7 @@ describe('User testing', () => {
     // Проверить, что лайк проставлен
     cy.get('[data-testid="book-card"] [data-testid="like-btn"]').should(
       'have.attr',
-      'data-testLiked',
+      'data-testliked',
       'true',
     );
 
@@ -58,7 +58,7 @@ describe('User testing', () => {
     cy.get('[data-testid="page-card"] [data-testid="like-btn"]').as('likeBtn');
 
     // Нажать на кнопку лайка и карточка должна исчезнуть
-    cy.get('@likeBtn').should('have.attr', 'data-testLiked', 'true').click();
+    cy.get('@likeBtn').should('have.attr', 'data-testliked', 'true').click();
     cy.get('[data-testid="page-card"]').should('not.exist');
   });
 });
