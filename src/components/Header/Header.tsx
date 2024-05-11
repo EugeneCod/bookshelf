@@ -37,12 +37,12 @@ const Header = () => {
   const panelContent = isAuth ? (
     <div className={s['panel']}>
       <Navigation />
-      <AuthBtn text="Log out" onClick={handleLogoutClick} />
+      <AuthBtn id="log-out" text="Log out" onClick={handleLogoutClick} />
     </div>
   ) : (
     <div className={s['panel']}>
-      <AuthBtn text="Log in" onClick={handleLoginClick} />
-      <AuthBtn text="Sign up" onClick={handleSignupClick} />
+      <AuthBtn id="log-in" text="Log in" onClick={handleLoginClick} />
+      <AuthBtn id="sign-up" text="Sign up" onClick={handleSignupClick} />
     </div>
   );
   return (

@@ -71,6 +71,7 @@ const SearchForm = () => {
         onChange={handleChangeInput}
         onBlur={handleBlurInput}
         onFocus={handleFocusInput}
+        data-testid="search-input"
       />
       <button
         disabled={!searchQuery}

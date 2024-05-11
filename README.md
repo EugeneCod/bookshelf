@@ -43,3 +43,4 @@
 - [x] Использование TypeScript.
 - [x] Использование Firebase.
 - [x] Настроен CI/CD.
+- [x] Добавлены [тесты](https://github.com/EugeneCod/bookshelf/tree/develop/cypress/e2e). 

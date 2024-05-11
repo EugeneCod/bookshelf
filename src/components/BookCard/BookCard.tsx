@@ -34,7 +34,7 @@ const BookCard = (props: Props) => {
   }
 
   return (
-    <li className={s['card']}>
+    <li className={s['card']} data-testid="page-card">
       <Link
         to={`${ROUTES.BOOK}/${card.id}`}
         className={s['card__image-container']}

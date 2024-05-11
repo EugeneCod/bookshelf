@@ -34,7 +34,7 @@ const Book = () => {
       <div className={s['page__container']}>
         <h1 className={s['page__title']}>More about the book</h1>
         {!!bookData && (
-          <div className={s['card']}>
+          <div data-testid="book-card" className={s['card']}>
             <div className={s['card__image-container']}>
               {isAuth && (
                 <LikeBtn isLiked={isLiked} onClick={handleLikeClick} />
