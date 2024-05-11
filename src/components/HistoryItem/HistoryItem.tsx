@@ -6,7 +6,6 @@ import { ROUTES } from '../../utils/constants';
 
 import s from './HistoryItem.module.scss';
 
-
 interface Props {
   searchQuery: string;
   historyId: string;
@@ -36,7 +35,7 @@ const HistoryItem = (props: Props) => {
   );
 };
 
-export default memo(HistoryItem) ;
+export default memo(HistoryItem);
 
 HistoryItem.propTypes = {
   searchQuery: PropTypes.string.isRequired,

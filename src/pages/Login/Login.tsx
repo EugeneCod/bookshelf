@@ -28,7 +28,7 @@ const Login = () => {
 
   async function handleLogin(): Promise<void> {
     dispatch(setUserIsLoading(true));
-    setLoginErrorMessage('')
+    setLoginErrorMessage('');
     setSubmitBtnText('Processing...');
     login(values.email, values.password)
       .then(() => {

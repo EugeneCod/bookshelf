@@ -27,7 +27,9 @@ export function transformResBook(item: ApiBooksFullItem): LocalBookFullData {
     title: item.volumeInfo.title,
     authors:
       item.volumeInfo.authors?.join(', ') || 'The authors is not specified',
-    imageLink: item.volumeInfo.imageLinks?.medium.replace('http://', 'https://') || stubImage,
+    imageLink:
+      item.volumeInfo.imageLinks?.medium.replace('http://', 'https://') ||
+      stubImage,
     averageRating: item.volumeInfo.averageRating?.toString() || 'n/a',
     categories:
       item.volumeInfo.categories?.join(', ') || 'Categories are not specified',
