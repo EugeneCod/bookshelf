@@ -1,6 +1,6 @@
 import {
   selectFavoritesStatus,
-  //selectFavoritesError,
+  selectFavoritesError,
   selectFavoritesIds,
 } from '../app/store/favorites/selectors';
 import { useAppDispatch, useAppSelector } from '../app/store/hooks';
@@ -15,7 +15,7 @@ import type { Status } from '../app/@types';
 export const useFavorites = (): {
   favorites: string[];
   status: Status;
-  // error: string | undefined;
+  error: string | undefined;
   addToFavorites: (bookId: string) => void;
   removeFromFavorites: (bookId: string) => void;
   checkIsLiked: (bookId: string | undefined) => boolean;
@@ -25,7 +25,7 @@ export const useFavorites = (): {
   const userId = useAppSelector(selectUserId);
   const favorites = useAppSelector(selectFavoritesIds);
   const status = useAppSelector(selectFavoritesStatus);
-  //const error = useAppSelector(selectFavoritesError);
+  const error = useAppSelector(selectFavoritesError);
 
   function addToFavorites(bookId: string) {
     userId && dispatch(addFavoritesId({ userId, bookId }));
@@ -42,7 +42,7 @@ export const useFavorites = (): {
   return {
     favorites,
     status,
-    // error,
+    error,
     addToFavorites,
     removeFromFavorites,
     checkIsLiked,
