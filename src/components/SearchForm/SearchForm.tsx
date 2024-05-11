@@ -24,12 +24,9 @@ const SearchForm = () => {
     setSearchQuery(searchQueryFromParams);
   }, [searchQueryFromParams]);
 
-  useEffect(() => {
-    debouncedSearchQuery && setSuggestionsOpened(true);;
-  }, [debouncedSearchQuery]);
-
   function handleChangeInput(evt: React.ChangeEvent<HTMLInputElement>) {
     setSearchQuery(evt.target.value);
+    setSuggestionsOpened(true);
   }
 
   function handleBlurInput() {

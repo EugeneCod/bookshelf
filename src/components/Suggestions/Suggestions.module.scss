@@ -4,8 +4,6 @@
   position: absolute;
   left: 0;
   top: 50px;
-  padding-top: 15px;
-  padding-bottom: 15px;
   border-radius: 12px;
   background-color: $bg-main;
   z-index: 3;
@@ -15,6 +13,7 @@
   width: 100%;
 
   &__title {
+    padding-top: 15px;
     text-align: center;
     margin-top: 0;
     margin-bottom: 15px;
@@ -22,7 +21,8 @@
   }
   &__list {
     list-style: none;
-    padding: 0;
+    padding-left: 0;
+    padding-bottom: 15px;
     margin: 0;
     display: grid;
     row-gap: 15px;
@@ -30,8 +30,7 @@
   &__message {
     color: $font-secondary;
     text-align: center;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 15px;
   }
   &__preloader {
     color: $font-secondary;
@@ -42,8 +41,7 @@
   &__error {
     color: $font-contrast;
     text-align: center;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 15px;
   }
 }
 
