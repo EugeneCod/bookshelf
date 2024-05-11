@@ -72,6 +72,10 @@ export const router = createBrowserRouter(
         },
       ],
     },
+    {
+      path: ROUTES.UNASSIGNED,
+      element: <NotFound />,
+    },
   ],
   { basename: '/bookshelf' },
 );

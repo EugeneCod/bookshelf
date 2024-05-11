@@ -23,7 +23,7 @@
 
 - [x] Реализованы Требования к функциональности.
 - [x] Для хранения учетных записей пользователей, их Избранного и Истории поиска, используем ~~LocalStorage~~ Firebase.
-- [x] Пишем функциональные компоненты c хуками в приоритете над классовыми.
+- [x] Пишем функциональные компоненты c хуками в приоритете над [классовыми](https://github.com/EugeneCod/bookshelf/blob/main/src/components/ErrorBoundary/ErrorBoundary.tsx) .
 - [x] Есть разделение на [умные](https://github.com/EugeneCod/bookshelf/blob/main/src/components/Header/Header.tsx) и [глупые](https://github.com/EugeneCod/bookshelf/blob/main/src/components/AuthBtn/AuthBtn.tsx) компоненты.
 - [x] Есть рендеринг [списков](https://github.com/EugeneCod/bookshelf/blob/main/src/components/CardList/CardList.tsx).
 - [x] Реализована хотя бы одна [форма](https://github.com/EugeneCod/bookshelf/blob/main/src/components/AuthForm/AuthForm.tsx).

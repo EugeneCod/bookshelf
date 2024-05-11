@@ -5,6 +5,7 @@ export { default as BookCard } from './BookCard/BookCard';
 export { default as BookCardFavorites } from './BookCardFavorites/BookCardFavorites';
 export { default as CardList } from './CardList/CardList';
 export { default as CardListFavorites } from './CardListFavorites/CardListFavorites';
+export { default as ErrorBoundary } from './ErrorBoundary/ErrorBoundary';
 export { default as Header } from './Header/Header';
 export { default as HistoryItem } from './HistoryItem/HistoryItem';
 export { default as LikeBtn } from './LikeBtn/LikeBtn';
