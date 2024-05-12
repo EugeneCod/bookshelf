@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import Suggestions from '../Suggestions/Suggestions';
@@ -19,18 +19,28 @@ const SearchForm = () => {
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
   const { addHistory } = useHistory();
   const isAuth = useAppSelector(selectUserIsAuth);
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     setSearchQuery(searchQueryFromParams);
   }, [searchQueryFromParams]);
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOut);
+    return () => {
+      document.removeEventListener('click', handleClickOut);
+    };
+  });
 
   function handleChangeInput(evt: React.ChangeEvent<HTMLInputElement>) {
     setSearchQuery(evt.target.value);
     setSuggestionsOpened(true);
   }
 
-  function handleBlurInput() {
-    setTimeout(() => setSuggestionsOpened(false), 100);
+  function handleClickOut(evt: MouseEvent) {
+    if (formRef.current && !formRef.current.contains(evt.target as Node)) {
+      setSuggestionsOpened(false);
+    }
   }
 
   function handleFocusInput() {
@@ -62,14 +72,17 @@ const SearchForm = () => {
     navigate(`${ROUTES.SEARCH}?q=${encodeSearchQuery}`);
   }
 
+  function closeSuggestions() {
+    setSuggestionsOpened(false);
+  }
+
   return (
-    <form className={s['search']} onSubmit={handleSubmit}>
+    <form ref={formRef} className={s['search']} onSubmit={handleSubmit}>
       <input
         className={s['search__input']}
         placeholder="Search on the bookshelf"
         value={searchQuery}
         onChange={handleChangeInput}
-        onBlur={handleBlurInput}
         onFocus={handleFocusInput}
         data-testid="search-input"
       />
@@ -82,7 +95,10 @@ const SearchForm = () => {
       </button>
       {suggestionsOpened && (
         <div className={s['search__suggestions-container']}>
-          <Suggestions searchQuery={debouncedSearchQuery} />
+          <Suggestions
+            searchQuery={debouncedSearchQuery}
+            onClose={closeSuggestions}
+          />
         </div>
       )}
     </form>

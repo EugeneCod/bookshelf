@@ -8,10 +8,11 @@ import s from './Suggestions.module.scss';
 
 interface Props {
   searchQuery: string;
+  onClose: () => void;
 }
 
 const Suggestions = (props: Props) => {
-  const { searchQuery } = props;
+  const { searchQuery, onClose } = props;
 
   const {
     data: booksData,
@@ -24,6 +25,10 @@ const Suggestions = (props: Props) => {
     { skip: !searchQuery },
   );
 
+  function handleLinkCLick() {
+    onClose();
+  }
+
   return (
     <div data-testid="suggestions" className={s['menu']}>
       {!!booksData && booksData.length !== 0 && (
@@ -34,6 +39,7 @@ const Suggestions = (props: Props) => {
               return (
                 <Link
                   to={`${ROUTES.BOOK}/${book.id}`}
+                  onClick={handleLinkCLick}
                   className={s['menu-card']}
                   key={book.id}
                   data-testid={`${book.id}`}
@@ -64,4 +70,5 @@ export default Suggestions;
 
 Suggestions.propTypes = {
   searchQuery: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
